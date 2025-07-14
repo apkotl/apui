@@ -1,0 +1,15 @@
+# docker-compose.dev.yaml - Development extend
+#version: '3.8'
+
+services:
+  api:
+    build:
+      args:
+        APP_DEBUG: "true"
+    environment:
+      APP_DEBUG: "true"
+    volumes:
+      - ./api:/app
+    ports:
+      - "${APP_API_PORT_DEV:-8000}:8000"
+    command: ["--reload"]

@@ -1,0 +1,13 @@
+# docker-compose.prod.yaml - Poduction extend
+#version: '3.8'
+
+services:
+  api:
+    build:
+      args:
+        APP_DEBUG: "false"
+        ARG_COPY_FROM: "./src"
+        ARG_COPY_DEST: "./src"
+    environment:
+      APP_DEBUG: "false"
+    command: ["--workers", "4"]
