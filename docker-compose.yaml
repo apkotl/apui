@@ -33,6 +33,22 @@ services:
       APP_ENVIRONMENT: ${APP_ENVIRONMENT}
     networks:
       - app_network
+  nginx:
+    container_name: ${APP_NAME}_nginx
+    image: ${APP_NAME}_nginx:${APP_API_VERSION}
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    environment:
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT}
+      #NGINX_PORT: 80 # 80|443 перенес в .dev .prod настройки
+      #NGINX_SERVER_NAME: "localhost" # "localhost" | "${APP_BASE_URL}" перенес в .dev .prod настройки
+      API_HOST: "api" # Имя другого сервиса в docker-compose
+      API_PORT: 8000
+    networks:
+      - app_network
+    
+    
 
 networks:
   app_network:

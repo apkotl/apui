@@ -13,6 +13,7 @@ services:
     ports:
       - "${APP_API_PORT_DEV:-8000}:8000"
     command: ["--reload"]
+#  Now use only in Prod mode ...
 #  web_vue3:
 #    volumes:
 #      - ./web/vue3/app:/app
@@ -23,3 +24,10 @@ services:
 #        npm install
 #        npm run dev  
 #      "
+  nginx:
+    environment:
+      NGINX_PORT: 80
+      NGINX_SERVER_NAME: "localhost"
+    ports:
+      - "80:80"
+
