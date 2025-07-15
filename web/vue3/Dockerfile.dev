@@ -1,0 +1,41 @@
+# web/vue3/Dockerfile
+#FROM node:20-alpine as build-stage
+FROM node:20-alpine
+
+# Application Arguments from docker-compose and Set Application Environment
+#ARG APP_ENVIRONMENT=unknown
+#ARG APP_DEBUG=false
+#ENV APP_ENVIRONMENT=$APP_ENVIRONMENT
+#ENV APP_DEBUG=$APP_DEBUG
+
+WORKDIR /app
+
+# Open port
+EXPOSE 5173
+
+
+#RUN apk update && apk add curl --no-cache && rm -rf /var/cache/apk/*
+#ENTRYPOINT [ "tail" ]
+#CMD [ "-f", "/dev/null" ]
+
+#ENTRYPOINT [ "npm" ]
+#CMD [ "run", "dev" ]
+
+#COPY package*.json ./
+#COPY pnpm-lock.yaml ./ # или package-lock.json/yarn.lock
+#RUN npm install # или pnpm install/yarn install
+
+
+
+
+# Передаем переменные окружения во время сборки Vue
+#ARG VITE_APP_API_URL
+#ENV VITE_APP_API_URL=$VITE_APP_API_URL
+
+#RUN npm run build # Убедитесь, что ваш package.json имеет скрипт 'build'
+
+# Этап продакшен-сервера (опционально, если не хотите использовать Nginx)
+# FROM nginx:alpine as production-stage
+# COPY --from=build-stage /app/dist /usr/share/nginx/html
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]

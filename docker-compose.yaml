@@ -18,13 +18,21 @@ services:
       # Анонимный том для кэша Poetry, чтобы он не конфликтовал с локальным монтированием
       # не уверен, что это нужно
       - api_poetry_cache:/opt/poetry/cache
-    entrypoint: ["poetry", "run", "uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
-     
+    entrypoint: ["poetry", "run", "uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]    
 #    depends_on:
 #      -db
 #      - db_dev
 #      - db_prod
-
+  web_vue3:
+    container_name: ${APP_NAME}_web_vue3
+    image: ${APP_NAME}_web_vue3:${APP_API_VERSION}
+    build:
+      context: ./web/vue3
+      dockerfile: Dockerfile.${APP_ENVIRONMENT}
+    environment:
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT}
+    networks:
+      - app_network
 
 networks:
   app_network:

@@ -13,3 +13,13 @@ services:
     ports:
       - "${APP_API_PORT_DEV:-8000}:8000"
     command: ["--reload"]
+#  web_vue3:
+#    volumes:
+#      - ./web/vue3/app:/app
+#    ports:
+#      - "${APP_WEB_VUE3_PORT_DEV:-5173}:5173"
+#    command: > 
+#      /bin/sh -c "
+#        npm install
+#        npm run dev  
+#      "

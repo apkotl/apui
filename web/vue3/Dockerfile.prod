@@ -1,0 +1,18 @@
+# web/vue3/Dockerfile
+#FROM node:20-alpine as build-stage
+FROM node:20-alpine
+
+# Application Arguments from docker-compose and Set Application Environment
+#ARG APP_ENVIRONMENT=unknown
+#ARG APP_DEBUG=false
+#ENV APP_ENVIRONMENT=$APP_ENVIRONMENT
+#ENV APP_DEBUG=$APP_DEBUG
+
+WORKDIR /app
+
+COPY ./app .
+RUN npm install
+RUN npm run build
+
+#ENTRYPOINT [ "tail" ]
+#CMD [ "-f", "/dev/null" ]
