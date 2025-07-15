@@ -90,7 +90,7 @@ switch ($Command) {
         }
     }
     default {
-        Write-Host "Invalid command. Usage: .\docker-compose.ps1 [prod|dev|stop|start|down|down-volumes]"
+        Write-Host "Invalid command. Usage: .\docker-compose.ps1 [up-prod|up-dev|stop|start|down|down-volumes]"
         exit 1
     }
 }
