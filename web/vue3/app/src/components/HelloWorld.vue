@@ -5,6 +5,46 @@ defineProps({
     required: true,
   },
 })
+
+
+////////// - TEST START
+import { ref, onMounted } from 'vue';
+
+// 1. Объявление реактивных переменных
+const apiData = ref(null); // Для хранения полученных JSON данных
+const loading = ref(true); // Индикатор загрузки
+const error = ref(null); // Для хранения ошибок
+
+// API URL
+const apiUrl = 'http://api.localhost/version?q=test+query+string'; 
+
+// 2. Test --- Функция для загрузки данных
+const fetchData = async () => {
+  loading.value = true;
+  error.value = null; // Сбрасываем ошибку перед новой попыткой
+
+  try {
+    const response = await fetch(apiUrl); // Выполняем HTTP-запрос
+
+    if (!response.ok) { // Проверяем успешность ответа (коды 2xx)
+      throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`);
+    }
+
+    const json = await response.json(); // Парсим JSON из ответа
+    apiData.value = json; // Сохраняем данные в реактивную переменную
+  } catch (err) {
+    error.value = `Не удалось загрузить данные: ${err.message}`; // Обработка ошибок сети или парсинга
+    console.error('Ошибка загрузки API:', err);
+  } finally {
+    loading.value = false; // Завершаем загрузку, независимо от результата
+  }
+};
+
+// 3. Вызов функции загрузки данных при монтировании компонента
+onMounted(() => {
+  fetchData();
+});
+////////// - TEST END
 </script>
 
 <template>
@@ -17,11 +57,21 @@ defineProps({
     </h3>
     <h3>
       Work with API:
-      <a href="http://127.0.0.1:8000/api" target="_blank" rel="noopener">Dev</a> |
-      <a href="http://127.0.0.1/api" target="_blank" rel="noopener">QA</a> |
-      <a href="https://127.0.0.1/api" target="_blank" rel="noopener">Prod</a>
-      
+      <a href="http://api.localhost" target="_blank" rel="noopener">Dev</a> |
+      <a href="http://api-qa.[domain].com" target="_blank" rel="noopener">QA</a> |
+      <a href="https://api.[domain].com" target="_blank" rel="noopener">Prod</a>
     </h3>
+    <h3>
+      API version: <b v-if="apiData">{{ apiData.data['version'] }}</b>
+    </h3>
+    
+    <p v-if="loading">Loading data ...</p>
+    <p v-if="error">{{ error }}</p>
+    
+    <div v-if="apiData">
+      <pre>{{ JSON.stringify(apiData, null, 2) }}</pre>
+    </div>
+
   </div>
 </template>
 
