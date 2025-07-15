@@ -31,18 +31,21 @@ api/**/*$py.class
 # db / nginx
 
 
-# web
-web/**/npm-debug.log*
-web/**/yarn-debug.log*
-web/**/yarn-error.log*
-web/**/pnpm-debug.log*
-web/**/lerna-debug.log*
+# web/hugo
 
-web/**/node_modules
-web/dist
-web/dist-ssr
-web/coverage
-web/**/*.local
+
+# web/vue3
+web/vue3/**/npm-debug.log*
+web/vue3/**/yarn-debug.log*
+web/vue3/**/yarn-error.log*
+web/vue3/**/pnpm-debug.log*
+web/vue3/**/lerna-debug.log*
+
+web/vue3/**/node_modules
+web/vue3/**/dist
+web/vue3/**/dist-ssr
+web/vue3/**/coverage
+web/vue3/**/*.local
 
 
 
