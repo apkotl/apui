@@ -17,6 +17,9 @@
 #   ./docker-compose.sh up-prod
 #   ./docker-compose.sh up-dev
 #   ./docker-compose.sh stop
+#   ./docker-compose.sh start
+#   ./docker-compose.sh down
+#   ./docker-compose.sh down-volumes
 
 # Check if Docker Compose is installed
 if ! command -v docker-compose &> /dev/null; then
@@ -43,7 +46,7 @@ case "$1" in
     up-dev)
         echo "Setting APP_ENVIRONMENT to dev and running Docker Compose..."
         export APP_ENVIRONMENT=dev
-        docker-compose -f docker-compose.yaml  -f docker-compose.dev.yaml up -d --build
+        docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
         if [ $? -ne 0 ]; then
             echo "Error: Failed to run Docker Compose for dev."
             exit 1
@@ -82,7 +85,7 @@ case "$1" in
         fi
         ;;
     *)
-        echo "Error: Invalid command. Usage: $0 [prod|dev|stop|start|down|down-volumes]"
+        echo "Error: Invalid command. Usage: $0 [up-prod|up-dev|stop|start|down|down-volumes]"
         exit 1
         ;;
 esac

@@ -56,4 +56,4 @@ Available Commands:
 
 ---
 
-Happy coding with **APUI**!
+Happy coding with APUI.
