@@ -33,4 +33,6 @@ services:
     ports:
       - "${NGINX_API_PORT:-80}:${NGINX_API_PORT:-80}"
       - "${NGINX_WEB_PORT:-80}:${NGINX_WEB_PORT:-80}"
+    volumes:
+      - ./web/vue3/app/dist:/usr/share/nginx/html
 

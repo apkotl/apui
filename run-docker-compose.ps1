@@ -42,7 +42,9 @@ switch ($Command) {
     "up-prod" {
         Write-Host "Setting APP_ENVIRONMENT to prod and running Docker Compose..."
         $env:APP_ENVIRONMENT = "prod"
-        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build
+        <#docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build#>
+        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml run --rm --build web_vue3
+        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build api db nginx
         if ($LASTEXITCODE -ne 0) {
             Write-Error "Failed to run Docker Compose for prod."
             exit 1
@@ -51,7 +53,9 @@ switch ($Command) {
     "up-dev" {
         Write-Host "Setting APP_ENVIRONMENT to dev and running Docker Compose..."
         $env:APP_ENVIRONMENT = "dev"
-        docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+        <#docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build#>
+        <#docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml run --rm --build web_vue3#>
+        docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build api db db_adminer nginx
         if ($LASTEXITCODE -ne 0) {
             Write-Error "Failed to run Docker Compose for dev."
             exit 1
@@ -83,7 +87,7 @@ switch ($Command) {
     }
     "down-volumes" {
         Write-Host "Stopping and removing Docker Compose containers and volumes..."
-        docker-compose down --volumes
+        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml down --volumes
         if ($LASTEXITCODE -ne 0) {
             Write-Error "Failed to remove containers and volumes."
             exit 1

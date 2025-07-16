@@ -37,7 +37,9 @@ case "$1" in
     up-prod)
         echo "Setting APP_ENVIRONMENT to prod and running Docker Compose..."
         export APP_ENVIRONMENT=prod
-        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build
+        #docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build
+        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml run --rm --build web_vue3
+        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build api db nginx
         if [ $? -ne 0 ]; then
             echo "Error: Failed to run Docker Compose for prod."
             exit 1
@@ -46,7 +48,9 @@ case "$1" in
     up-dev)
         echo "Setting APP_ENVIRONMENT to dev and running Docker Compose..."
         export APP_ENVIRONMENT=dev
-        docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+        #docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build
+        #docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml run --rm --build web_vue3
+        docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build api db db_adminer nginx
         if [ $? -ne 0 ]; then
             echo "Error: Failed to run Docker Compose for dev."
             exit 1
@@ -78,7 +82,7 @@ case "$1" in
         ;;
     down-volumes)
         echo "Stopping and removing Docker Compose containers and volumes..."
-        docker-compose down --volumes
+        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml down --volumes
         if [ $? -ne 0 ]; then
             echo "Error: Failed to remove containers and volumes."
             exit 1

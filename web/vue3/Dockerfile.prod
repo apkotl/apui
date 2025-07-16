@@ -14,6 +14,7 @@ COPY ./app .
 RUN npm install
 RUN npm run build
 
+CMD ["echo", "Vue.js build completed (prod)"]
 #debug
 #ENTRYPOINT [ "tail" ]
 #CMD [ "-f", "/dev/null" ]

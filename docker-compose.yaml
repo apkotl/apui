@@ -19,10 +19,32 @@ services:
       # не уверен, что это нужно
       - api_poetry_cache:/opt/poetry/cache
     entrypoint: ["poetry", "run", "uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]    
-#    depends_on:
-#      -db
-#      - db_dev
-#      - db_prod
+    depends_on:
+      - db
+  db:
+    image: postgres:16
+    container_name: ${APP_NAME}_db
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT_DEV:-5432}:${POSTGRES_PORT:-5432}"
+    volumes:
+      - ./../apui_db_volume:/var/lib/postgresql/data
+    networks:
+      - app_network
+  db_adminer:
+    image: adminer
+    container_name: ${APP_NAME}_db_adminer
+    restart: always
+    ports:
+      - "${DB_ADMINER_PORT_DEV:-8080}:${DB_ADMINER_PORT:-8080}"
+    networks:
+      - app_network
   web_vue3:
     container_name: ${APP_NAME}_web_vue3
     image: ${APP_NAME}_web_vue3:${APP_API_VERSION}

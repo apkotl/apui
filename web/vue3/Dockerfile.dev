@@ -13,6 +13,7 @@ WORKDIR /app
 # Open port
 EXPOSE 5173
 
+CMD ["echo", "Vue.js build completed (dev)"]
 
 #RUN apk update && apk add curl --no-cache && rm -rf /var/cache/apk/*
 #ENTRYPOINT [ "tail" ]
