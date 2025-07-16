@@ -12,17 +12,16 @@ services:
       APP_DEBUG: "false"
     command: ["--workers", "4"]
   web_vue3:
+    environment:
+      APP_DEBUG: "false"
     volumes:
       - web_html:/app/dist
   nginx:
-    ports:
-      - "80:80"
-      #- "443:443"
     environment:
-      NGINX_PORT: 80
-      #NGINX_PORT: 443
-      NGINX_SERVER_NAME: "${APP_BASE_URL}"
-      API_SERVER_NAME: "${API_URL_PREFIX}.${APP_BASE_URL}"
+      APP_DEBUG: "false"
+    ports:
+      - "${NGINX_API_PORT:-80}:${NGINX_API_PORT:-80}"
+      - "${NGINX_WEB_PORT:-80}:${NGINX_WEB_PORT:-80}"
     volumes:
       - web_html:/usr/share/nginx/html
 

@@ -14,5 +14,6 @@ COPY ./app .
 RUN npm install
 RUN npm run build
 
+#debug
 #ENTRYPOINT [ "tail" ]
 #CMD [ "-f", "/dev/null" ]

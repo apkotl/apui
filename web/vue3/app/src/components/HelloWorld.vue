@@ -57,9 +57,9 @@ onMounted(() => {
     </h3>
     <h3>
       Work with API:
-      <a href="http://api.localhost" target="_blank" rel="noopener">Dev</a> |
-      <a href="http://api-qa.[domain].com" target="_blank" rel="noopener">QA</a> |
-      <a href="https://api.[domain].com" target="_blank" rel="noopener">Prod</a>
+      <a href="http://api.localhost/docs" target="_blank" rel="noopener">Dev</a> |
+      <a href="http://api-qa.[domain].com/docs" target="_blank" rel="noopener">QA</a> |
+      <a href="https://api.[domain].com/docs" target="_blank" rel="noopener">Prod</a>
     </h3>
     <h3>
       API version: <b v-if="apiData">{{ apiData.data['version'] }}</b>

@@ -23,3 +23,6 @@ EXPOSE 443
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 # Указываем команду для запуска Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
+#debug
+#CMD [ "tail", "-f", "/dev/null" ]
