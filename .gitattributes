@@ -1,0 +1,3 @@
+*.sh text eol=lf
+.env.template eol=lf
+nginx.conf.template eol=lf
