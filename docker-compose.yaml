@@ -15,14 +15,13 @@ services:
     networks:
       - app_network
     volumes:
-      # Анонимный том для кэша Poetry, чтобы он не конфликтовал с локальным монтированием
-      # не уверен, что это нужно
+      # Anonymous volume for Poetry cache so it doesn't conflict with local mount
       - api_poetry_cache:/opt/poetry/cache
-    entrypoint: ["poetry", "run", "uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]    
+    entrypoint: ["poetry", "run", "uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "${API_PORT:-8000}"]
     depends_on:
       - db
   db:
-    image: postgres:16
+    image: postgres:17
     container_name: ${APP_NAME}_db
     restart: always
     # set shared memory limit when using docker compose
@@ -34,7 +33,7 @@ services:
     ports:
       - "${POSTGRES_PORT_DEV:-5432}:${POSTGRES_PORT:-5432}"
     volumes:
-      - ./../apui_db_volume:/var/lib/postgresql/data
+      - db_postgresql_data:/var/lib/postgresql/data
     networks:
       - app_network
   db_adminer:
@@ -73,14 +72,15 @@ services:
       - app_network
     depends_on:
       - api
-      - web_vue3
-    
-    
 
+
+# Definition network
 networks:
   app_network:
     driver: bridge
 
+
 # Definition of named volumes
 volumes:
   api_poetry_cache:
+  db_postgresql_data:
