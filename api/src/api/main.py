@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from sqlalchemy import select
+
 from .config import settings
+from .config_db import setup_database, SessionDep, BookSchema, BookAddSchema, BookModel
+
+
 
 # Create Application
 app = FastAPI()
@@ -42,6 +47,7 @@ def read_item():
             {
                 "base_dir": f"{settings.base_dir}",
                 "APP_ENVIRONMENT": settings.APP_ENVIRONMENT,
+                "DOCKER_CONTAINER_MODE": settings.DOCKER_CONTAINER_MODE,
 
                 "APP_NAME": settings.APP_NAME,
                 "APP_VERSION": settings.APP_VERSION,
@@ -77,3 +83,31 @@ def simple_item_generator(limit:int, prefix:str) -> dict[int: str]:
             'name': f"{prefix}{current_number}"
         }
         current_number += 1
+
+
+
+
+
+@app.post("/db/setup")
+async def db_setup(session:SessionDep):
+    await setup_database(session)
+    return {'data': 'success'}
+
+
+@app.post("/db/books")
+async def db_add_books(data: BookAddSchema, session:SessionDep):
+    new_book = BookModel(
+        title=data.title,
+        author=data.author,
+    )
+    session.add(new_book)
+    await session.commit()
+    return {'data': 'success'}
+
+
+@app.get("/db/books")
+async def db_get_books(session: SessionDep):
+    query = select(BookModel)
+    result = await session.execute(query)
+    return {'data': result.scalars().all()}
+
