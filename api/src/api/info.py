@@ -1,46 +1,21 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter
 
-from sqlalchemy import select
+from src.config.settings import settings
 
-from .config import settings
-from .config_db import setup_database, SessionDep, BookSchema, BookAddSchema, BookModel
+router = APIRouter(tags=["Info"])
 
 
-
-# Create Application
-app = FastAPI()
-
-# CORS settings
-origins = [
-    f"{settings.NGINX_WEB_HTTP_PROTOCOL}://{settings.NGINX_WEB_SERVER_NAME}",
-
-    #"http://localhost",
-    #"http://localhost:5173",
-    #"http://your_domain.com",
-    #"http://www.your_domain.com",
-    #"https://your_domain.com",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"], # Allow all methods (GET, POST, PUT, DELETE, etc.)
-    allow_headers=["*"], # Allow all headers
-)
-
-@app.get("/")
+@router.get("/")
 def read_root():
     return {"data": "Hello API"}
 
 
-@app.get("/version")
+@router.get("/version")
 def read_item(q: str | None = None):
     return {"data": {"version": settings.APP_API_VERSION, "q": q}}
 
 
-@app.get("/env")
+@router.get("/env")
 def read_item():
     return {
         "data":
@@ -67,7 +42,7 @@ def read_item():
     }
 
 
-@app.get("/items/{item_count}")
+@router.get("/items/{item_count}")
 def read_item(item_count: int, prefix: str | None = "item_#"):
     return {
         "data": {"version": settings.APP_API_VERSION, "item_count": item_count, "prefix": prefix},
@@ -83,31 +58,3 @@ def simple_item_generator(limit:int, prefix:str) -> dict[int: str]:
             'name': f"{prefix}{current_number}"
         }
         current_number += 1
-
-
-
-
-
-@app.post("/db/setup")
-async def db_setup(session:SessionDep):
-    await setup_database(session)
-    return {'data': 'success'}
-
-
-@app.post("/db/books")
-async def db_add_books(data: BookAddSchema, session:SessionDep):
-    new_book = BookModel(
-        title=data.title,
-        author=data.author,
-    )
-    session.add(new_book)
-    await session.commit()
-    return {'data': 'success'}
-
-
-@app.get("/db/books")
-async def db_get_books(session: SessionDep):
-    query = select(BookModel)
-    result = await session.execute(query)
-    return {'data': result.scalars().all()}
-

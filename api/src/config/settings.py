@@ -2,8 +2,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field, SecretStr
 from pathlib import Path
 
-BASE_DIR = str(Path(__file__).resolve().parents[3])
 
+BASE_DIR = str(Path(__file__).resolve().parents[3])
 
 # singleton decorator
 def singleton(cls):
@@ -50,10 +50,12 @@ class Settings(BaseSettings):
     base_dir: str = Field(BASE_DIR)
 
 
-# Создаем экземпляр настроек, который будет использоваться во всем приложении
+# Create a settings instance that will be used throughout the application
 settings = Settings()
 
+
 if __name__ == "__main__":
+    print(f"Config.py: {__file__}")
     print(f"base_dir: {settings.base_dir}")
     print(f"APP_ENVIRONMENT: {settings.APP_ENVIRONMENT}")
     print(f"DOCKER_CONTAINER_MODE: {settings.DOCKER_CONTAINER_MODE}")
