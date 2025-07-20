@@ -1,13 +1,13 @@
 from src.config import settings
 
 
-db_host = "db" if settings.DOCKER_CONTAINER_MODE else settings.NGINX_WEB_SERVER_NAME
+db_host = "db" if settings.IS_CONTAINER else "localhost"
 
 DATABASE_URL = f"postgresql+asyncpg://" \
-    f"{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}" \
+    f"{settings.DB_USER}:{settings.DB_PASSWORD}" \
     f"@" \
-    f"{db_host}:{settings.POSTGRES_PORT}/" \
-    f"{settings.POSTGRES_DB}"
+    f"{db_host}:{settings.DB_PORT}/" \
+    f"{settings.DB_NAME}"
 
 DATABASE_CONFIG = {
     'url': DATABASE_URL,

@@ -1,38 +1,16 @@
 # docker-compose.dev.yaml - Development extend
-#version: '3.8'
 
 services:
   api:
-    build:
-      args:
-        APP_DEBUG: "true"
-    environment:
-      APP_DEBUG: "true"
     volumes:
       - ./api:/app
     ports:
-      - "${API_PORT_DEV:-8000}:${API_PORT:-8000}"
+      - "${API_UVICORN_PORT:-8000}:${API_UVICORN_PORT:-8000}"
     command: ["--reload"]
-#  Now use only in Prod mode ...
-#  web_vue3:
-#    volumes:
-#      - ./web/vue3/app:/app
-#    ports:
-#      - "${APP_WEB_VUE3_PORT_DEV:-5173}:5173"
-#    command: > 
-#      /bin/sh -c "
-#        npm install
-#        npm run dev  
-#      "
   web_vue3:
-    environment:
-      APP_DEBUG: "true"
+    volumes:
+      - ./web/vue3/app/dist:/app/dist
   nginx:
-    environment:
-      APP_DEBUG: "true"
-    ports:
-      - "${NGINX_API_PORT:-80}:${NGINX_API_PORT:-80}"
-      - "${NGINX_WEB_PORT:-80}:${NGINX_WEB_PORT:-80}"
     volumes:
       - ./web/vue3/app/dist:/usr/share/nginx/html
 

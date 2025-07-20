@@ -17,6 +17,9 @@ logs/
 
 # [root]
 .env
+.env.development
+.env.production
+.env.qa
 .bak/
 LOG_*.md
 

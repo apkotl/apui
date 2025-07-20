@@ -3,11 +3,8 @@ from src.config.settings import  settings
 
 # CORS settings
 CORS_ORIGINS = [
-    f"{settings.NGINX_WEB_HTTP_PROTOCOL}://{settings.NGINX_WEB_SERVER_NAME}",
-
-    #"http://localhost",
-    #"http://localhost:5173",
-    #"http://your_domain.com",
+    f"{settings.WEB_PROTOCOL}://{settings.WEB_HOST}",
+    f"{settings.WEB_PROTOCOL}://{settings.WEB_HOST}:{settings.WEB_PORT}",
 ]
 
 CORS_CONFIG = {

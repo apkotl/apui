@@ -20,24 +20,28 @@ def read_item():
     return {
         "data":
             {
-                "base_dir": f"{settings.base_dir}",
-                "APP_ENVIRONMENT": settings.APP_ENVIRONMENT,
-                "DOCKER_CONTAINER_MODE": settings.DOCKER_CONTAINER_MODE,
+                "ENVIRONMENT": settings.ENVIRONMENT,
+                "IS_CONTAINER": settings.IS_CONTAINER,
+                "ENV_FILE": settings.ENV_FILE,
 
                 "APP_NAME": settings.APP_NAME,
-                "APP_VERSION": settings.APP_VERSION,
                 "APP_API_VERSION": settings.APP_API_VERSION,
                 "APP_WEB_VERSION": settings.APP_WEB_VERSION,
 
-                "NGINX_API_SERVER_NAME": settings.NGINX_API_SERVER_NAME,
-                "NGINX_API_HTTP_PROTOCOL": settings.NGINX_API_HTTP_PROTOCOL,
-                "NGINX_API_PORT": settings.NGINX_API_PORT,
+                "WEB_HOST": settings.WEB_HOST,
+                "WEB_PROTOCOL": settings.WEB_PROTOCOL,
+                "WEB_PORT": settings.WEB_PORT,
 
-                "NGINX_WEB_SERVER_NAME": settings.NGINX_WEB_SERVER_NAME,
-                "NGINX_WEB_HTTP_PROTOCOL": settings.NGINX_WEB_HTTP_PROTOCOL,
-                "NGINX_WEB_PORT": settings.NGINX_WEB_PORT,
+                "API_HOST": settings.API_HOST,
+                "API_PROTOCOL": settings.API_PROTOCOL,
+                "API_PORT": settings.API_PORT,
 
-                "all_settings": settings if settings.APP_ENVIRONMENT == "dev" else "only available for 'dev' of the environment"
+                "DB_NAME": settings.DB_NAME,
+                "DB_USER": settings.DB_USER,
+                "DB_PASSWORD": settings.DB_PASSWORD,
+                "DB_PORT": settings.DB_PORT,
+
+                "all_settings": settings if settings.ENVIRONMENT == "development" else "only available in 'development' mode"
             }
     }
 

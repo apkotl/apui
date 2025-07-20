@@ -1,102 +1,128 @@
 <#
 .SYNOPSIS
-    PowerShell script to manage Docker Compose for dev and prod environments.
+This PowerShell script simplifies Docker Compose operations for different environments.
 
 .DESCRIPTION
-    This script allows you to:
-    - Run Docker Compose for 'dev' or 'prod' environments with specific configuration files.
-    - Stop, start, or remove Docker Compose containers and volumes.
+This script allows you to run various Docker Compose commands (up, start, stop, down)
+while dynamically selecting the appropriate Docker Compose file based on the
+specified environment (dev, prod, qa). It supports passing additional arguments
+directly to the Docker Compose command.
 
-.USAGE
-    .\docker-compose.ps1 [command]
-    Commands:
-        up-prod        Run Docker Compose for production environment
-        up-dev         Run Docker Compose for development environment
-        stop           Stop all running containers
-        start          Start stopped containers
-        down           Stop and remove containers
-        down-volumes   Stop and remove containers and volumes
+.PARAMETER Environment
+The operational mode for Docker Compose: 'dev', 'prod', or 'qa'. Default is 'dev'.
 
-.EXAMPLE
-    .\docker-compose.ps1 up-prod
-    .\docker-compose.ps1 up-dev
-    .\docker-compose.ps1 stop
-    .\docker-compose.ps1 start
-    .\docker-compose.ps1 down
-    .\docker-compose.ps1 down-volumes
+.PARAMETER ComposeCommand
+The Docker Compose command to execute (e.g., 'up', 'start', 'stop', 'down').
+This is a positional parameter and should be the first argument after '--env'.
+
+.PARAMETER PassthruArgs
+Any additional arguments to pass directly to the Docker Compose command.
 #>
 
-param (
-    [Parameter(Position=0)]
-    [ValidateSet("up-prod", "up-dev", "stop", "start", "down", "down-volumes")]
-    [string]$Command
+[CmdletBinding(PositionalBinding = $False, DefaultParameterSetName = 'Default')]
+Param(
+    [Alias("environment", "env", "e")]
+    [ValidateSet("dev", "prod", "qa")]
+    [string]$EnvironmentShort = "dev", # Default to 'dev'
+
+    [Parameter(Mandatory = $True, Position = 0)]
+    [ValidateSet("up", "start", "stop", "down")]
+    [string]$ComposeCommand,
+
+    [Parameter(ValueFromRemainingArguments = $True)]
+    [string[]]$PassthruArgs
 )
 
-# Check if Docker Compose is installed
-if (-not (Get-Command docker-compose -ErrorAction SilentlyContinue)) {
-    Write-Error "Docker Compose is not installed or not found in PATH. Please install Docker Compose."
-    exit 1
+
+# 1. Map short environment to full environment name & set environment
+$EnvironmentFull = switch ($EnvironmentShort) {
+    "dev"  { "development" }
+    "prod" { "production" }
+    "qa"   { "qa" }
+    default { "development" } # Fallback, though ValidateSet should prevent this
 }
 
-switch ($Command) {
-    "up-prod" {
-        Write-Host "Setting APP_ENVIRONMENT to prod and running Docker Compose..."
-        $env:APP_ENVIRONMENT = "prod"
-        <#docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build#>
-        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml run --rm --build web_vue3
-        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d --build api db nginx
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to run Docker Compose for prod."
-            exit 1
-        }
+$env:ENV_SHORT=$EnvironmentShort
+$env:ENVIRONMENT=$EnvironmentFull
+
+$ENV_FILE = ".env.$EnvironmentFull"
+$DOCKER = "docker"
+
+Write-Host "Preparing to run Docker Compose with:" -ForegroundColor Cyan
+Write-Host " - Environment (short): $EnvironmentShort" -ForegroundColor Cyan
+Write-Host " - Environment (full):  $EnvironmentFull" -ForegroundColor Cyan
+Write-Host " - Env File:  $ENV_FILE" -ForegroundColor Cyan
+Write-Host " - Docker Compose Command: $ComposeCommand" -ForegroundColor Cyan
+if ($PassthruArgs.Count -gt 0) {
+    Write-Host " - Additional Arguments: $($PassthruArgs -join ' ')" -ForegroundColor Cyan
+}
+Write-Host ""
+
+
+# 2. Build the base Docker Compose arguments
+# -f docker-compose.base.yaml -f docker-compose.{env_short}.yaml
+$baseArgs = @(
+    "compose"
+    "--env-file", "$ENV_FILE"
+    "-f", "docker-compose.base.yaml",
+    "-f", "docker-compose.$EnvironmentShort.yaml"
+)
+
+# 3.0. - Create args for run command, if need
+$DockerComposeArgs_0 = @()
+if (($EnvironmentFull -eq "production") -or ($EnvironmentFull -eq "development")) {
+    $DockerComposeArgs_0 = switch ($ComposeCommand) {
+        "up" { $baseArgs + @("run", "--rm", "--build", "web_vue3") }
+        "stop" { @() }
+        "start" { $baseArgs + @("run", "--rm", "--build", "web_vue3") }
+        "down" { @() }
+        default { @() }
     }
-    "up-dev" {
-        Write-Host "Setting APP_ENVIRONMENT to dev and running Docker Compose..."
-        $env:APP_ENVIRONMENT = "dev"
-        <#docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build#>
-        <#docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml run --rm --build web_vue3#>
-        docker-compose -f docker-compose.yaml -f docker-compose.dev.yaml up -d --build api db db_adminer nginx
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to run Docker Compose for dev."
-            exit 1
-        }
+}
+
+# 3.1. - Add command, addition args and list of services
+$baseArgs = $baseArgs + $ComposeCommand
+if ($PassthruArgs.Count -gt 0) {
+    $baseArgs += $PassthruArgs
+}
+$DockerComposeArgs_1 = switch ($ComposeCommand) {
+    "up" { $baseArgs + @("-d", "--build", "api", "db", "nginx") }
+    "stop" { $baseArgs + @("api", "db", "nginx") }
+    "start" { $baseArgs + @("api", "db", "nginx") }
+    "down" { $baseArgs + @("api", "db", "nginx") }
+    default { @() }
+}
+
+# 4. Execute docker compose
+Write-Host "Executing command: docker compose" -ForegroundColor Green
+Write-Host ""
+
+
+if ($DockerComposeArgs_0.Count -gt 0) {
+    Write-Host "Executing command: docker $($DockerComposeArgs_0 -join ' ')" -ForegroundColor Green
+    Write-Host ""
+
+    try {
+        Start-Process -FilePath $DOCKER -ArgumentList $DockerComposeArgs_0 -Wait -NoNewWindow
     }
-    "stop" {
-        Write-Host "Stopping Docker Compose containers..."
-        docker-compose stop
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to stop containers."
-            exit 1
-        }
-    }
-    "start" {
-        Write-Host "Starting Docker Compose containers..."
-        docker-compose start
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to start containers."
-            exit 1
-        }
-    }
-    "down" {
-        Write-Host "Stopping and removing Docker Compose containers..."
-        docker-compose down
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to remove containers."
-            exit 1
-        }
-    }
-    "down-volumes" {
-        Write-Host "Stopping and removing Docker Compose containers and volumes..."
-        docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml down --volumes
-        if ($LASTEXITCODE -ne 0) {
-            Write-Error "Failed to remove containers and volumes."
-            exit 1
-        }
-    }
-    default {
-        Write-Host "Invalid command. Usage: .\docker-compose.ps1 [up-prod|up-dev|stop|start|down|down-volumes]"
+    catch {
+        Write-Error "Error executing Docker Compose command: $($_.Exception.Message)"
         exit 1
     }
 }
 
-Write-Host "Command '$Command' executed successfully."
+if ($DockerComposeArgs_1.Count -gt 0) {
+    Write-Host "Executing command: docker $($DockerComposeArgs_1 -join ' ')" -ForegroundColor Green
+    Write-Host ""
+
+    try {
+        Start-Process -FilePath $DOCKER -ArgumentList $DockerComposeArgs_1 -Wait -NoNewWindow
+    }
+    catch {
+        Write-Error "Error executing Docker Compose command: $($_.Exception.Message)"
+        exit 1
+    }
+}
+
+Write-Host ""
+Write-Host "Docker Compose command completed." -ForegroundColor Green

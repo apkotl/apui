@@ -11,6 +11,5 @@ app = FastAPI()
 # Include Main Router
 app.include_router(main_router)
 
-# Add CORS configuration
-app.add_middleware(CORSMiddleware, **CORS_CONFIG)
-
+# Add CORS configuration (Disabled here, processed by Nginx)
+#app.add_middleware(CORSMiddleware, **CORS_CONFIG)

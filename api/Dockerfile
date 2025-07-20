@@ -9,10 +9,8 @@ ENV PATH="$POETRY_HOME/bin:$PATH"
 
 
 # Application Arguments from docker-compose and Set Application Environment
-ARG APP_ENVIRONMENT=unknown
-ARG APP_DEBUG=false
-ENV APP_ENVIRONMENT=$APP_ENVIRONMENT
-ENV APP_DEBUG=$APP_DEBUG
+ARG ARG_ENVIRONMENT=unknown
+#ENV ENVIRONMENT=$ARG_ENVIRONMENT
 ARG ARG_COPY_FROM=./README.md
 ARG ARG_COPY_DEST=./README.md
 
@@ -38,11 +36,11 @@ COPY ${ARG_COPY_FROM} ${ARG_COPY_DEST}
 
 # Check and Installing dependencies
 RUN poetry config virtualenvs.create false && \
-    if [ "$APP_ENVIRONMENT" = "prod" ]; then \
-        echo "Installing dependencies for prod"; \
+    if [ "$ARG_ENVIRONMENT" = "production" ]; then \
+        echo "Installing dependencies for production"; \
         poetry install --no-cache --no-root; \
     else \
-        echo "Installing dependencies for dev"; \
+        echo "Installing dependencies for development"; \
         poetry install --no-root; \
     fi
 

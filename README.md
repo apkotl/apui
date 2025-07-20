@@ -14,9 +14,10 @@ Before running the project, you need to configure the environment variables.
 
 * **Copy the environment variable template file:**
     ```bash
-    cp .env.template .env
+    cp .env.template .env.development
+    cp .env.template .env.production
     ```
-* **Edit the `.env` file:** Open the newly created `.env` file in your preferred text editor and make any necessary adjustments according to your environment (e.g., database parameters, API keys, etc.).
+* **Edit `.env.development` and `.env.production` files:** Open the newly created `.env.*` files in your preferred text editor and make any necessary adjustments according to your environment (e.g., database parameters, API keys, etc.).
 
 ### 2. Running the Project
 
@@ -26,23 +27,29 @@ Once your environment variables are configured, you can run the project using th
 
 Execute the `run-docker-compose.sh` script with the desired command.
 ```Bash
-./run-docker-compose.sh [command]
+./run-docker-compose.sh [args] [command]
 ```
 
 #### For Windows Users:
 
 Execute the `run-docker-compose.ps1` script with the desired command.
 ```Bash
-./run-docker-compose.ps1 [command]
+.\run-docker-compose.ps1 [args] [command] [passthru_args]
 ```
 
+Available Arguments:
+ - `-e dev` - for development environment (default value).
+ - `-e prod` - for production environment.
+ - `-e qa` - not supported at the moment.
+
 Available Commands:
-- `up-dev` - Builds and starts containers in development mode.
-- `up-prod` - Builds and starts containers in production mode.
+- `up` - Builds and starts containers.
 - `stop` - Stops running containers without removing them.
 - `start` - Starts stopped containers.
 - `down` - Stops and removes containers(, networks, and images *).
-- `down-volumes` - Stops and removes containers(, networks, images,*) and volumes.
+
+Available Passthru Args (for docker compose command):
+- `--volumes` - for remove volumes with `down` command.
 
 ---
 

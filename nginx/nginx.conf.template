@@ -29,22 +29,68 @@ http {
 
     
 
-    # Для того чтобы работало имя сервиса как host ${NGINX_API_HOST}
+
+    # --- BEGIN: block MAP for CORS ---
+    # Defines allowed CORS origins.
+    # $http_origin - this is the Origin header from the browser request.
+    # $cors_origin - this is the variable we will use in add_header.
+    map $http_origin $cors_origin {
+        # Allowed domains (without trailing slash).
+        # Add here all frontend domains that can access your API.
+        "${WEB_PROTOCOL}://${WEB_HOST}:${WEB_PORT}" "${WEB_PROTOCOL}://${WEB_HOST}:${WEB_PORT}";
+        "${WEB_PROTOCOL}://${WEB_HOST}" "${WEB_PROTOCOL}://${WEB_HOST}";
+        
+        # If Origin does not match any of the above,
+        # $cors_origin will be an empty string.
+        default "";
+    }
+    # --- END: block MAP for CORS ---
+
+
+    # This setting is necessary in order for
+    # the docker-compose service names 'api', 'db', etc. to work as a host
     resolver 127.0.0.11 valid=5s;
     
     # API SERVICE
     server {
-        listen       ${NGINX_API_PORT};
-        listen  [::]:${NGINX_API_PORT};
-        server_name  ${NGINX_API_SERVER_NAME};
+        listen       ${API_PORT};
+        listen  [::]:${API_PORT};
+        server_name  ${API_HOST};
 
         #access_log  /var/log/nginx/host.access.log  main;
 
 
         # API settings
-        #location ~ ^/api/(.*)?$ {
         location / {
-            proxy_pass http://${NGINX_API_HOST}:${API_PORT};
+            # --- BEGIN: Added CORS headers ---
+            #add_header 'Access-Control-Allow-Origin' '${WEB_PROTOCOL}://${WEB_HOST}';
+            # Instead of the hard-coded Access-Control-Allow-Origin,
+            # we use the $cors_origin variable defined in the map block.
+
+            # Add the Access-Control-Allow-Origin header only if $cors_origin is not empty.
+            # This is important if 'Access-Control-Allow-Credentials' is set to 'true'.
+            if ($cors_origin ~* ".+") {
+                add_header 'Access-Control-Allow-Origin' "$cors_origin";
+            }
+            
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE'; # Allowed methods
+            add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization'; # Allowed Request Headers
+            add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range'; # Headers that the browser is allowed to read
+            add_header 'Access-Control-Allow-Credentials' 'true'; # Enable if frontend sends cookies or authorization headers
+
+            # MANDATORY: Processing preflight OPTIONS requests
+            # Browsers send OPTIONS request before "complex" requests (POST, PUT, DELETE, with non-standard headers, etc.)
+            # This block should return a 204 No Content response with CORS headers.
+            if ($request_method = 'OPTIONS') {
+                add_header 'Access-Control-Max-Age' 1728000; # Cache preflight response for 20 days (can be reduced)
+                add_header 'Content-Type' 'text/plain; charset=utf-8';
+                add_header 'Content-Length' 0;
+                return 204; # 204 No Content - successful response to OPTIONS without a body
+            }
+            # --- END: Added CORS headers ---
+            
+            
+            proxy_pass http://api:${API_UVICORN_PORT};
 
             # Recommended headers for proxying
             proxy_set_header Host $host;
@@ -54,7 +100,6 @@ http {
         
             client_max_body_size 100M; 
         }
-
         
 
         #error_page  404              /404.html;
@@ -70,19 +115,18 @@ http {
 
     # WEB SITE
     server {
-        listen       ${NGINX_WEB_PORT};
-        listen  [::]:${NGINX_WEB_PORT};
-        server_name  ${NGINX_WEB_SERVER_NAME};
+        listen       ${WEB_PORT};
+        listen  [::]:${WEB_PORT};
+        server_name  ${WEB_HOST};
 
         #access_log  /var/log/nginx/host.access.log  main;
 
-        # Default settings
+        # WEB settings
         location / {
             root   /usr/share/nginx/html;
             index  index.html index.htm;
         }
 
-        
 
         #error_page  404              /404.html;
 
@@ -93,35 +137,5 @@ http {
             root   /usr/share/nginx/html;
         }
     }
-    
-    
-    
-    
-    
-#    server {
-#
-#        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-#        #
-#        #location ~ \.php$ {
-#        #    proxy_pass   http://127.0.0.1;
-#        #}
-#
-#        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-#        #
-#        #location ~ \.php$ {
-#        #    root           html;
-#        #    fastcgi_pass   127.0.0.1:9000;
-#        #    fastcgi_index  index.php;
-#        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-#        #    include        fastcgi_params;
-#        #}
-#
-#        # deny access to .htaccess files, if Apache's document root
-#        # concurs with nginx's one
-#        #
-#        #location ~ /\.ht {
-#        #    deny  all;
-#        #}
-#    }
 
 }

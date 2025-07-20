@@ -1,27 +1,16 @@
 # docker-compose.prod.yaml - Poduction extend
-#version: '3.8'
 
 services:
   api:
     build:
       args:
-        APP_DEBUG: "false"
         ARG_COPY_FROM: "./src"
         ARG_COPY_DEST: "./src"
-    environment:
-      APP_DEBUG: "false"
     command: ["--workers", "4"]
   web_vue3:
-    environment:
-      APP_DEBUG: "false"
     volumes:
       - web_html:/app/dist
   nginx:
-    environment:
-      APP_DEBUG: "false"
-    ports:
-      - "${NGINX_API_PORT:-80}:${NGINX_API_PORT:-80}"
-      - "${NGINX_WEB_PORT:-80}:${NGINX_WEB_PORT:-80}"
     volumes:
       - web_html:/usr/share/nginx/html
 

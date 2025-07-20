@@ -1,0 +1,116 @@
+# docker-compose.base.yaml - base configuration
+
+
+# services:
+#   api: -> FastAPI
+#   [web:] - no use
+#   web_vue3: -> Vue3 (vito)
+#   web_hugo: -> Hugo server
+#   db:
+#   db_adminer: (?) dev only 
+#   nginx:
+
+
+services:
+  api:
+    container_name: ${APP_NAME}_api_${ENV_SHORT}
+    image: ${APP_NAME}_api_${ENV_SHORT}:${APP_API_VERSION}
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        ARG_ENVIRONMENT: ${ENVIRONMENT}
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT}
+      IS_CONTAINER: True
+      APP_NAME: ${APP_NAME}
+      APP_API_VERSION: ${APP_API_VERSION}
+      APP_WEB_VERSION: ${APP_WEB_VERSION}
+      WEB_HOST: ${WEB_HOST}
+      WEB_PROTOCOL: ${WEB_PROTOCOL}
+      WEB_PORT: ${WEB_PORT}
+      API_HOST: ${API_HOST}
+      API_PROTOCOL: ${API_PROTOCOL}
+      API_PORT: ${API_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+    networks:
+      - app_network
+    volumes:
+      # Anonymous volume for Poetry cache so it doesn't conflict with local mount
+      - api_poetry_cache:/opt/poetry/cache
+    entrypoint: ["poetry", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "${API_UVICORN_PORT:-8000}"]
+    depends_on:
+      - db
+  db:
+    image: postgres:17
+    container_name: ${APP_NAME}_db
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
+    volumes:
+      - db_postgresql_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+  db_adminer:
+    image: adminer
+    container_name: ${APP_NAME}_db_adminer
+    restart: always
+    ports:
+      - "${DB_ADMINER_PORT:-8080}:${DB_ADMINER_PORT:-8080}"
+    networks:
+      - app_network
+  web_vue3:
+    container_name: ${APP_NAME}_web_vue3_${ENV_SHORT}
+    image: ${APP_NAME}_web_vue3_${ENV_SHORT}:${APP_API_VERSION}
+    build:
+      context: ./web/vue3
+      dockerfile: Dockerfile
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT}
+      IS_CONTAINER: True
+    entrypoint: ["npm", "run", "build"]
+    networks:
+      - app_network
+  nginx:
+    container_name: ${APP_NAME}_nginx_${ENV_SHORT}
+    image: ${APP_NAME}_nginx_${ENV_SHORT}:${APP_API_VERSION}
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT}
+      #IS_CONTAINER: True
+      API_HOST: ${API_HOST}
+      API_PROTOCOL: ${API_PROTOCOL}
+      API_PORT: ${API_PORT}
+      API_UVICORN_PORT: ${API_UVICORN_PORT}
+      WEB_HOST: ${WEB_HOST}
+      WEB_PROTOCOL: ${WEB_PROTOCOL}
+      WEB_PORT: ${WEB_PORT}   
+    ports:
+      - "${API_PORT:-80}:${API_PORT:-80}"
+      - "${WEB_PORT:-80}:${WEB_PORT:-80}"
+    networks:
+      - app_network
+    depends_on:
+      - api
+
+
+# Definition network
+networks:
+  app_network:
+    driver: bridge
+
+
+# Definition of named volumes
+volumes:
+  api_poetry_cache:
+  db_postgresql_data:
