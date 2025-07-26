@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Path, Query, HTTPException
 from sqlalchemy import select
 
+from src.core.exceptions import DbRecordNotFoundError, BookPermissionDeniedError
 from src.models.books import BookModel
 from src.shemas.books import NewBookSchema, BookSchema
 from src.db.dependencies import AsyncSessionDep
@@ -34,11 +35,14 @@ async def db_get_books_by_id(
     book = result.scalars().first()
     if book is None:
         #return {'data': f"Book with id: {book_id} not found!"}
-        return api_error(code=404, desc=f"Book with id: {book_id} not found.")
         #raise HTTPException(
-        #    status_code=204,
+        #    status_code=200,
         #    detail=f"Book with id={book_id} not found"
         #)
+        # return api_error(code=404, desc=f"Book with id: {book_id} not found.")
+        raise DbRecordNotFoundError(name="book", param=str(book_id))
+        #raise BookPermissionDeniedError()
+
     #return {'data': book}
     return api_success(data={'book': serialize_book(book)})
 

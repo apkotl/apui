@@ -1,15 +1,5 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-
-from src.api import main_router
-from src.config import CORS_CONFIG
+from src.app_factory import create_app
 
 
 # Create Application
-app = FastAPI()
-
-# Include Main Router
-app.include_router(main_router)
-
-# Add CORS configuration (Disabled here, processed by Nginx)
-#app.add_middleware(CORSMiddleware, **CORS_CONFIG)
+app = create_app()
