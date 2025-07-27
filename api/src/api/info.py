@@ -41,6 +41,8 @@ def read_item():
                 "DB_PASSWORD": settings.DB_PASSWORD,
                 "DB_PORT": settings.DB_PORT,
 
+                "OAUTH_GOOGLE_CLIENT_ID": settings.OAUTH_GOOGLE_CLIENT_ID,
+
                 "all_settings": settings if settings.ENVIRONMENT == "development" else "only available in 'development' mode"
             }
     }

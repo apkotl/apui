@@ -9,15 +9,15 @@ BASE_DIR = str(Path(__file__).resolve().parents[3])
 ENV_FILE_FULL_NAME = f"{BASE_DIR}{"" if BASE_DIR == "/" else os.sep}.env.{ENV}"
 
 # singleton decorator
-def singleton(cls):
-    instances = {}
-
-    def get_instance(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-
-    return get_instance
+#def singleton(cls):
+#    instances = {}
+#
+#    def get_instance(*args, **kwargs):
+#        if cls not in instances:
+#            instances[cls] = cls(*args, **kwargs)
+#        return instances[cls]
+#
+#    return get_instance
 
 
 #@singleton
@@ -55,6 +55,8 @@ class Settings(BaseSettings):
     DB_PORT: str = Field(...)
     #DB_ADMINER_PORT: str = Field(...)
 
+    OAUTH_GOOGLE_CLIENT_ID: str = Field(...)
+    OAUTH_GOOGLE_CLIENT_SECRET: str = Field(...)
 
 
 # Create a settings instance that will be used throughout the application
@@ -85,5 +87,7 @@ if __name__ == "__main__":
     print(f"DB_PASSWORD: {settings.DB_PASSWORD}")
     print(f"DB_PORT: {settings.DB_PORT}")
     print(f"--------")
+    print(f"OAUTH_GOOGLE_CLIENT_ID: {settings.OAUTH_GOOGLE_CLIENT_ID}")
+
 
 

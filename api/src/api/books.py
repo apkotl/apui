@@ -7,7 +7,9 @@ from src.shemas.books import NewBookSchema, BookSchema
 from src.db.dependencies import AsyncSessionDep
 from src.shemas.api_response import api_success, api_error
 
-router = APIRouter(tags=["Books"])
+router = APIRouter(prefix="/db/books", tags=["Books"])
+
+
 
 # TODO ...
 def serialize_book(book: BookModel) -> BookSchema:
@@ -15,8 +17,7 @@ def serialize_book(book: BookModel) -> BookSchema:
 
 
 
-
-@router.get("/db/books")
+@router.get("")
 async def db_get_books(session: AsyncSessionDep):
     query = select(BookModel).order_by('id')
     result = await session.execute(query)
@@ -25,7 +26,7 @@ async def db_get_books(session: AsyncSessionDep):
     return api_success(data={'books': [serialize_book(b) for b in books]})
 
 
-@router.get("/db/books/{id}")
+@router.get("/{id}")
 async def db_get_books_by_id(
         session: AsyncSessionDep,
         book_id: int = Path(..., alias='id')
@@ -47,7 +48,7 @@ async def db_get_books_by_id(
     return api_success(data={'book': serialize_book(book)})
 
 
-@router.post("/db/books")
+@router.post("")
 async def db_add_books(
         session: AsyncSessionDep,
         data: NewBookSchema
@@ -65,7 +66,7 @@ async def db_add_books(
 
 
 
-@router.put("/db/books")
+@router.put("")
 async def db_update_books(
         session: AsyncSessionDep,
         data: BookSchema
@@ -88,7 +89,7 @@ async def db_update_books(
     return api_success(data={'book': serialize_book(book)})
 
 
-@router.patch("/db/books/{id}")
+@router.patch("/{id}")
 async def db_update_book(
     session: AsyncSessionDep,
     book_id: int = Path(..., alias="id"),
@@ -125,8 +126,8 @@ async def db_update_book(
     return api_success(data={'book': serialize_book(book)})
 
 
-#@router.delete("/db/book/{id}", status_code=HTTP_204_NO_CONTENT)
-@router.delete("/db/books/{id}")
+#@router.delete("/{id}", status_code=HTTP_204_NO_CONTENT)
+@router.delete("/{id}")
 async def db_delete_books(
         session: AsyncSessionDep,
         book_id: int = Path(..., alias='id')
