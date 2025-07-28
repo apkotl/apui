@@ -42,11 +42,11 @@ class Settings(BaseSettings):
 
     WEB_HOST: str = Field(...)
     WEB_PROTOCOL: str = Field(...)
-    WEB_PORT: str = Field(...)
+    WEB_PORT: int = Field(...)
 
     API_HOST: str = Field(...)
     API_PROTOCOL: str = Field(...)
-    API_PORT: str = Field(...)
+    API_PORT: int = Field(...)
     #API_UVICORN_PORT: str = Field(...)
 
     DB_NAME: str = Field(...)
@@ -57,6 +57,18 @@ class Settings(BaseSettings):
 
     OAUTH_GOOGLE_CLIENT_ID: str = Field(...)
     OAUTH_GOOGLE_CLIENT_SECRET: str = Field(...)
+
+
+    def web_url(self):
+        _port = ""
+        if self.WEB_PROTOCOL == "http" and self.WEB_PORT == 80:
+            pass
+        elif self.WEB_PROTOCOL == "https" and self.WEB_PORT == 443:
+            pass
+        else:
+            _port = f":{self.WEB_PORT}"
+
+        return f"{self.WEB_PROTOCOL}://{self.WEB_HOST}{_port}"
 
 
 # Create a settings instance that will be used throughout the application
