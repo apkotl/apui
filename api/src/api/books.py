@@ -63,7 +63,9 @@ async def db_get_books_by_id(
         #raise DbRecordNotFoundError(name="book", param=str(book_id))
         #raise BookPermissionDeniedError()
         raise APIException_NotFound(
-            detail=create_not_found_detail(book_id)
+            detail=create_not_found_detail(book_id),
+            resource_type="db:books:id",
+            resource_id=book_id
         )
 
     #return {'data': book}

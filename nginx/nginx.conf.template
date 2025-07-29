@@ -39,6 +39,9 @@ http {
         # Add here all frontend domains that can access your API.
         "${WEB_PROTOCOL}://${WEB_HOST}:${WEB_PORT}" "${WEB_PROTOCOL}://${WEB_HOST}:${WEB_PORT}";
         "${WEB_PROTOCOL}://${WEB_HOST}" "${WEB_PROTOCOL}://${WEB_HOST}";
+
+        # for localhost:5137 - Vue3
+        "http://localhost:5173" "http://localhost:5173";
         
         # If Origin does not match any of the above,
         # $cors_origin will be an empty string.

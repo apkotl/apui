@@ -44,12 +44,17 @@ const fetchData = async () => {
 onMounted(() => {
   fetchData();
 });
+
+
+const _piUrl = import.meta.env.VITE_API_URL
+const _appName = import.meta.env.VITE_APP_NAME
+const _isDebug = import.meta.env.VITE_DEBUG
 ////////// - TEST END
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="green">{{ msg }} - {{ _appName }}</h1>
     <h3>
       You’ve successfully created a project with
       <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +

@@ -9,7 +9,7 @@ from src.config.google_oauth import generate_google_oauth_redirect_uri
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
-@router.get("/google/uri")
+@router.get("/google/uri", include_in_schema=False)
 def get_google_auth_redirect_uri():
     uri = generate_google_oauth_redirect_uri()
     return RedirectResponse(url=uri, status_code=302)

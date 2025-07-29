@@ -1,8 +1,12 @@
 import os
+
+from typing import Literal
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field, SecretStr
 from pathlib import Path
 
+import src.core.const as const
 
 ENV = os.getenv("ENVIRONMENT", default="development")
 BASE_DIR = str(Path(__file__).resolve().parents[3])
@@ -41,11 +45,11 @@ class Settings(BaseSettings):
     APP_WEB_VERSION: str = Field(...)
 
     WEB_HOST: str = Field(...)
-    WEB_PROTOCOL: str = Field(...)
+    WEB_PROTOCOL: Literal["http", "https"] = Field(...)
     WEB_PORT: int = Field(...)
 
     API_HOST: str = Field(...)
-    API_PROTOCOL: str = Field(...)
+    API_PROTOCOL: Literal["http", "https"] = Field(...)
     API_PORT: int = Field(...)
     #API_UVICORN_PORT: str = Field(...)
 
@@ -61,9 +65,9 @@ class Settings(BaseSettings):
 
     def web_url(self):
         _port = ""
-        if self.WEB_PROTOCOL == "http" and self.WEB_PORT == 80:
+        if self.WEB_PROTOCOL == const.HTTP and self.WEB_PORT == 80:
             pass
-        elif self.WEB_PROTOCOL == "https" and self.WEB_PORT == 443:
+        elif self.WEB_PROTOCOL == const.HTTPS and self.WEB_PORT == 443:
             pass
         else:
             _port = f":{self.WEB_PORT}"

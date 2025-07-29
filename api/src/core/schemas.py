@@ -16,7 +16,7 @@ class BaseResponse(BaseModel, Generic[T]):
     data: T | None = Field(None, description="Полезные данные ответа.")
     # Дополнительные поля, если нужны
     #timestamp: float = Field(..., description="Время генерации ответа в Unix timestamp.")
-    timestamp: float = Field(default_factory=time.time, description="Время генерации ответа в Unix timestamp.")
+    timestamp: int = Field(default_factory=lambda: int(time.time()), description="Время генерации ответа в Unix timestamp.")
 
     class Config:
         # Добавляем настройку для Pydantic, чтобы позволить Generic type

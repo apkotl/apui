@@ -75,6 +75,11 @@ services:
     build:
       context: ./web/vue3
       dockerfile: Dockerfile
+      args:
+        ARG_ENVIRONMENT: ${ENVIRONMENT}
+        ARG_VITE_API_URL: ${VITE_API_URL}
+        ARG_VITE_APP_NAME: ${VITE_APP_NAME}
+        ARG_VITE_DEBUG: ${VITE_DEBUG}
     environment:
       ENVIRONMENT: ${ENVIRONMENT}
       IS_CONTAINER: True
