@@ -45,19 +45,3 @@ class ListBooksResponse(BaseResponse[List[BookSchema]]):
     def __init__(self, data: List[BookSchema], total_count: int, page: int = 1, page_size: int = 10, **kwargs: Any):
         super().__init__(data=data, total_count=total_count, page=page, page_size=page_size, **kwargs)
 
-"""
-class UserResponse(BaseResponse[User]):
-    
-    ###Ответ для получения данных пользователя.
-    
-    message: str = "User retrieved successfully."
-    status: str = "success"
-
-class MessageResponse(BaseResponse[Dict[str, Any]]):
-    
-    ###Общий ответ для операций, которые возвращают только сообщение (например, удаление).
-    
-    message: str
-    status: str = "success"
-    data: Optional[Dict[str, Any]] = None # Здесь data может быть пустым или содержать доп. инфо
-"""
