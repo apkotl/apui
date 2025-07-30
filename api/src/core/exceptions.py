@@ -1,13 +1,17 @@
 from typing import Any
 
-from starlette.exceptions import HTTPException as StarletteHTTPException
-from starlette import status
+#from starlette.exceptions import HTTPException as StarletteHTTPException
+#from starlette import status
+
+from fastapi import HTTPException, status
+
 from src.config import settings
 
 
 PROBLEM_URL_PATH = f"{settings.web_url()}/problems"
 
-class APIException(StarletteHTTPException):
+#class APIException(StarletteHTTPException):
+class APIException(HTTPException):
     """
     Common API Exception class.
     """

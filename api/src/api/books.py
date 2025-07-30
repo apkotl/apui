@@ -1,15 +1,17 @@
-from fastapi import APIRouter, Path, Query, status
+from fastapi import APIRouter, Request, Path, Query, HTTPException, status
+#from starlette.exceptions import HTTPException
 from sqlalchemy import select
 
 from src.db.dependencies import AsyncSessionDep
 
 from src.models.books import BookModel
-
 from src.shemas.books import (
     NewBookSchema, BookSchema,
     SingleBookResponse,
     ListBooksResponse
 )
+
+from src.config.logging import get_logger
 
 from src.core.exceptions import (
         APIException_BadRequest,
@@ -20,7 +22,7 @@ from src.core.exceptions import (
 
 
 router = APIRouter(prefix="/db/books", tags=["Books"])
-
+logger = get_logger('app.api.books')
 
 
 # TODO ...
@@ -31,46 +33,55 @@ def create_not_found_detail(book_id: int) -> str:
     return f"Book with id='{book_id}' not found."
 
 
-
 @router.get("")
-async def db_get_books(session: AsyncSessionDep):
-    query = select(BookModel).order_by('id')
-    result = await session.execute(query)
-    books = result.scalars().all()
-    #return {'books': books}
-    #return api_success(data={'books': [serialize_book(b) for b in books]})
-    return ListBooksResponse(
-        data=[serialize_book(b) for b in books],
-        total_count=1000
-    )
+async def db_get_books(session: AsyncSessionDep, request: Request):
+    request_id = getattr(request.state, 'request_id', 'unknown')
+    logger.info(f"[{request_id}] Getting all books")
+
+    try:
+        query = select(BookModel).order_by('id')
+        result = await session.execute(query)
+        books = result.scalars().all()
+        logger.info(f"[{request_id}] Successfully retrieved all books")
+        return ListBooksResponse(
+            data=[serialize_book(b) for b in books],
+            total_count=1000
+        )
+    except HTTPException as e:
+        raise
+    except Exception as e:
+        logger.error(f"[{request_id}] Error getting all books: {str(e)}", exc_info=True)
+        raise
 
 
 @router.get("/{id}")
 async def db_get_books_by_id(
         session: AsyncSessionDep,
+        request: Request,
         book_id: int = Path(..., alias='id')
 ):
-    query = select(BookModel).where(BookModel.id == book_id)
-    result = await session.execute(query)
-    book = result.scalars().first()
-    if book is None:
-        #return {'data': f"Book with id: {book_id} not found!"}
-        #raise HTTPException(
-        #    status_code=200,
-        #    detail=f"Book with id={book_id} not found"
-        #)
-        # return api_error(code=404, desc=f"Book with id: {book_id} not found.")
-        #raise DbRecordNotFoundError(name="book", param=str(book_id))
-        #raise BookPermissionDeniedError()
-        raise APIException_NotFound(
-            detail=create_not_found_detail(book_id),
-            resource_type="db:books:id",
-            resource_id=book_id
-        )
+    request_id = getattr(request.state, 'request_id', 'unknown')
+    logger.info(f"[{request_id}] Getting book with ID: {book_id}")
 
-    #return {'data': book}
-    #return api_success(data={'book': serialize_book(book)})
-    return SingleBookResponse(data=serialize_book(book))
+    try:
+        query = select(BookModel).where(BookModel.id == book_id)
+        result = await session.execute(query)
+        book = result.scalars().first()
+        if book is None:
+            logger.warning(f"[{request_id}] {create_not_found_detail(book_id)}")
+            raise APIException_NotFound(
+                detail=create_not_found_detail(book_id),
+                resource_type="db:books:id",
+                resource_id=book_id
+            )
+
+        logger.info(f"[{request_id}] Successfully retrieved book: {book_id}")
+        return SingleBookResponse(data=serialize_book(book))
+    except HTTPException as e:
+        raise
+    except Exception as e:
+        logger.error(f"[{request_id}] Error getting book {book_id}: {str(e)}", exc_info=True)
+        raise
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)

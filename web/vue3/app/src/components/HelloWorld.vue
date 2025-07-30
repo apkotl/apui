@@ -16,7 +16,8 @@ const loading = ref(true); // Индикатор загрузки
 const error = ref(null); // Для хранения ошибок
 
 // API URL
-const apiUrl = 'http://api.localhost/version?q=test+query+string'; 
+//const apiUrl = 'http://api.localhost/version?q=test+query+string'; 
+const apiUrl = 'http://localhost:8000/version?q=test+query+string'; 
 
 // 2. Test --- Функция для загрузки данных
 const fetchData = async () => {
