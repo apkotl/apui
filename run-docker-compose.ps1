@@ -86,10 +86,10 @@ if ($PassthruArgs.Count -gt 0) {
     $baseArgs += $PassthruArgs
 }
 $DockerComposeArgs_1 = switch ($ComposeCommand) {
-    "up" { $baseArgs + @("-d", "--build", "api", "db", "nginx") }
-    "stop" { $baseArgs + @("api", "db", "nginx") }
-    "start" { $baseArgs + @("api", "db", "nginx") }
-    "down" { $baseArgs + @("api", "db", "nginx") }
+    "up" { $baseArgs + @("-d", "--build", "api", "db", "redis", "nginx") }
+    "stop" { $baseArgs + @("api", "db", "redis", "nginx") }
+    "start" { $baseArgs + @("api", "db", "redis", "nginx") }
+    "down" { $baseArgs + @("api", "db", "redis", "nginx") }
     default { @() }
 }
 

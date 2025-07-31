@@ -134,10 +134,10 @@ fi
 DockerComposeArgs_1=()
 case "$ComposeCommand" in
     "up")
-        DockerComposeArgs_1=("${currentComposeArgs[@]}" "-d" "--build" "api" "db" "nginx")
+        DockerComposeArgs_1=("${currentComposeArgs[@]}" "-d" "--build" "api" "db" "redis" "nginx")
         ;;
     "stop"|"start"|"down")
-        DockerComposeArgs_1=("${currentComposeArgs[@]}" "api" "db" "nginx")
+        DockerComposeArgs_1=("${currentComposeArgs[@]}" "api" "db" "redis" "nginx")
         ;;
     *)
         # Default case for other commands if any, remains empty
