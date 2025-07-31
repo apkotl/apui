@@ -17,6 +17,9 @@ CORS_CONFIG_PROD = {
 # CORS settings (Development mode)
 CORS_ORIGINS_DEV = [
     #"http://localhost:5173",
+    #"http://localhost:3200",
+    #"http://localhost",
+    #"http://api.localhost",
     #f"{settings.WEB_PROTOCOL}://{settings.WEB_HOST}",
     #f"{settings.WEB_PROTOCOL}://{settings.WEB_HOST}:{settings.WEB_PORT}",
     "*"

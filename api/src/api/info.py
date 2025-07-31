@@ -31,6 +31,7 @@ def read_item():
                 "WEB_HOST": settings.WEB_HOST,
                 "WEB_PROTOCOL": settings.WEB_PROTOCOL,
                 "WEB_PORT": settings.WEB_PORT,
+                "FRONTEND_PORT": settings.FRONTEND_PORT,
 
                 "API_HOST": settings.API_HOST,
                 "API_PROTOCOL": settings.API_PROTOCOL,
@@ -42,6 +43,9 @@ def read_item():
                 "DB_PORT": settings.DB_PORT,
 
                 "OAUTH_GOOGLE_CLIENT_ID": settings.OAUTH_GOOGLE_CLIENT_ID,
+
+                "web_url": settings.web_url(),
+                "frontend_url": settings.frontend_url(),
 
                 "all_settings": settings if settings.ENVIRONMENT == "development" else "only available in 'development' mode"
             }

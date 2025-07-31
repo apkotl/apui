@@ -22,7 +22,7 @@ def apply_middleware(app: FastAPI) -> FastAPI:
     :param app: current FastAPI application    :return:
     """
 
-    if (not settings.IS_CONTAINER) or (settings.ENVIRONMENT == const.DEVELOPMENT):
+    if not settings.IS_CONTAINER:
         app.add_middleware(CORSMiddleware, **CORS_CONFIG_DEV)
 
     app.add_middleware(LoggingMiddleware)

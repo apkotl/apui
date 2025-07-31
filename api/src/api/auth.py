@@ -2,11 +2,15 @@ from typing import Annotated
 from fastapi import APIRouter, Body
 from fastapi.responses import RedirectResponse
 
+import jwt
 import aiohttp
 
+from src.core.exceptions import APIException
 from src.shemas.auth import GoogleUriTestResponse
 from src.config import settings
 from src.config.google_oauth import generate_google_oauth_redirect_uri
+
+from src.state_storage import state_storage
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -25,10 +29,20 @@ def get_google_auth_redirect_uri_test():
 @router.post("/google/callback")
 async def handle_code(
         code: Annotated[str, Body(embed=True)],
+        state: Annotated[str, Body(embed=True)],
 ):
+    if state not in state_storage:
+        raise APIException(
+            detail="State incorrect!",
+            status_code=400,
+            type="google_status_incorrect",
+            title="Google status incorrect"
+        )
+    else:
+        print("State correct")
+
+
     google_token_url = "https://oauth2.googleapis.com/token"
-    port = "" if settings.IS_CONTAINER else ":5173"
-    redirect_url = f"http://localhost{port}/auth/google"
 
     async with aiohttp.ClientSession() as session:
         async with session.post(
@@ -37,9 +51,22 @@ async def handle_code(
                 'client_id': settings.OAUTH_GOOGLE_CLIENT_ID,
                 'client_secret': settings.OAUTH_GOOGLE_CLIENT_SECRET,
                 'grant_type': "authorization_code",
-                'redirect_uri': redirect_url,
+                'redirect_uri': settings.frontend_url(path='/auth/google'),
                 'code': code,
-            }
+            },
+            ssl=False, # for dev only
         ) as response:
             res = await response.json()
             print(f"{res=}")
+
+            id_token = res["id_token"]
+            user_data = jwt.decode(
+                id_token,
+                algorithms=["RS256"],
+                options={"verify_signature": False},
+            )
+
+    print(f"{user_data=}")
+    return {
+        "user": user_data
+    }

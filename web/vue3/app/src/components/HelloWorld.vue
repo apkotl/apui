@@ -5,8 +5,6 @@ defineProps({
     required: true,
   },
 })
-
-
 ////////// - TEST START
 import { ref, onMounted } from 'vue';
 
@@ -16,8 +14,7 @@ const loading = ref(true); // Индикатор загрузки
 const error = ref(null); // Для хранения ошибок
 
 // API URL
-//const apiUrl = 'http://api.localhost/version?q=test+query+string'; 
-const apiUrl = 'http://localhost:8000/version?q=test+query+string'; 
+const apiUrl = import.meta.env.VITE_API_URL + "/version?q=test+query+string"
 
 // 2. Test --- Функция для загрузки данных
 const fetchData = async () => {
@@ -47,7 +44,7 @@ onMounted(() => {
 });
 
 
-const _piUrl = import.meta.env.VITE_API_URL
+const _apiUrl = import.meta.env.VITE_API_URL
 const _appName = import.meta.env.VITE_APP_NAME
 const _isDebug = import.meta.env.VITE_DEBUG
 ////////// - TEST END
@@ -55,19 +52,18 @@ const _isDebug = import.meta.env.VITE_DEBUG
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }} - {{ _appName }}</h1>
+    <h1 class="green">{{ msg }}: {{ _appName }}</h1>
     <h3>
-      You’ve successfully created a project with
+      You've successfully created a project with
       <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
     <h3>
-      Work with API:
-      <a href="http://api.localhost/docs" target="_blank" rel="noopener">Dev</a> |
-      <a href="http://api-qa.[domain].com/docs" target="_blank" rel="noopener">QA</a> |
-      <a href="https://api.[domain].com/docs" target="_blank" rel="noopener">Prod</a>
+      APP_NAME: {{ _appName }}<br />
+      API_URL: {{ _apiUrl }}<br />
+      IS_DEBUG: {{ _isDebug }}<br />
     </h3>
-    <h3>
+    <h3 class="green">
       API version: <b v-if="apiData">{{ apiData.data['version'] }}</b>
     </h3>
     
@@ -75,9 +71,9 @@ const _isDebug = import.meta.env.VITE_DEBUG
     <p v-if="error">{{ error }}</p>
     
     <div v-if="apiData">
-      <pre>{{ JSON.stringify(apiData, null, 2) }}</pre>
+      <pre style="font-size: smaller;">{{ JSON.stringify(apiData, null, 2) }}</pre>
     </div>
-
+    
   </div>
 </template>
 
