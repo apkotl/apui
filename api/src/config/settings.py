@@ -71,9 +71,9 @@ class Settings(BaseSettings):
         elif self.WEB_PROTOCOL == const.Protocol.HTTPS and self.WEB_PORT == 443:
             pass
         else:
-            _port = f":{self.WEB_PORT}{path}"
+            _port = f":{self.WEB_PORT}"
 
-        return f"{self.WEB_PROTOCOL}://{self.WEB_HOST}{_port}"
+        return f"{self.WEB_PROTOCOL}://{self.WEB_HOST}{_port}{path}"
 
     def frontend_url(self, path: str = ''):
         _port = ""

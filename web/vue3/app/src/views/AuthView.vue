@@ -10,11 +10,16 @@
 
 <script>
 const _apiUrl = import.meta.env.VITE_API_URL
+const _isDev = import.meta.env.DEV
+const _isProd = import.meta.env.PROD
+
+
+
 export default {
   methods: {
     loginWithGoogle() {
       //window.location.href = 'http://localhost:8000/auth/google/uri';
-      window.location.href = _apiUrl + '/auth/google/uri';
+      window.location.href = _apiUrl + '/auth/google/uri?mode=' + (_isProd ? "prod" : "dev");
     }
   }
 }

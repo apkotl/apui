@@ -5,13 +5,13 @@ from src.config import settings
 from src.state_storage import state_storage
 
 
-def generate_google_oauth_redirect_uri() -> str:
+def generate_google_oauth_redirect_uri(func) -> str:
     random_state = secrets.token_urlsafe(16)
     state_storage.add(random_state)
 
     query_params = {
         'client_id': settings.OAUTH_GOOGLE_CLIENT_ID,
-        'redirect_uri': settings.frontend_url(path='/auth/google'),
+        'redirect_uri': func(path='/auth/google'),
         'response_type': "code",
         'scope': " ".join ([
             "https://www.googleapis.com/auth/calendar",

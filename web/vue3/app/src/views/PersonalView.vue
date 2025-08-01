@@ -23,7 +23,8 @@
 
 <script>
 const _apiUrl = import.meta.env.VITE_API_URL
-
+const _isDev = import.meta.env.DEV
+const _isProd = import.meta.env.PROD
 
 export default {
   data() {
@@ -41,7 +42,7 @@ export default {
 
     if (code && state) {
 
-      fetch(_apiUrl + '/auth/google/callback', {
+      fetch(_apiUrl + '/auth/google/callback?mode=' + (_isProd ? "prod" : "dev"), {
         body: JSON.stringify({ code, state }),
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

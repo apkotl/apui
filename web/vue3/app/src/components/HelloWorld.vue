@@ -47,6 +47,9 @@ onMounted(() => {
 const _apiUrl = import.meta.env.VITE_API_URL
 const _appName = import.meta.env.VITE_APP_NAME
 const _isDebug = import.meta.env.VITE_DEBUG
+
+const _isDev = import.meta.env.DEV
+const _isProd = import.meta.env.PROD
 ////////// - TEST END
 </script>
 
@@ -62,6 +65,9 @@ const _isDebug = import.meta.env.VITE_DEBUG
       APP_NAME: {{ _appName }}<br />
       API_URL: {{ _apiUrl }}<br />
       IS_DEBUG: {{ _isDebug }}<br />
+
+      IS_DEV: {{ _isDev }}<br />
+      IS_PROD: {{ _isProd }}<br />
     </h3>
     <h3 class="green">
       API version: <b v-if="apiData">{{ apiData.data['version'] }}</b>
