@@ -14,7 +14,7 @@ const loading = ref(true); // Индикатор загрузки
 const error = ref(null); // Для хранения ошибок
 
 // API URL
-const apiUrl = import.meta.env.VITE_API_URL + "/version?q=test+query+string"
+const apiUrl = import.meta.env.VITE_API_URL + "/v1"
 
 // 2. Test --- Функция для загрузки данных
 const fetchData = async () => {
@@ -70,7 +70,7 @@ const _isProd = import.meta.env.PROD
       IS_PROD: {{ _isProd }}<br />
     </h3>
     <h3 class="green">
-      API version: <b v-if="apiData">{{ apiData.data['version'] }}</b>
+      API version: <b v-if="apiData">{{ apiData.version }}</b>
     </h3>
     
     <p v-if="loading">Loading data ...</p>

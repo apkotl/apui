@@ -1,11 +1,11 @@
 #from redis import Redis
-import redis.asyncio as redis_async
+#import redis.asyncio as redis_async
 
 from fastapi import HTTPException, Depends, APIRouter
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 
-
+from src.databases.dependencies import AsyncRedisClientDep
 from src.config.logging import get_logger
 
 
@@ -30,10 +30,10 @@ class HashSetRequest(BaseModel):
 
 
 
-# Dependency для получения Redis клиента
-async def get_redis():
-    from src.app_factory import redis_client
-    return redis_client
+## Dependency для получения Redis клиента
+#async def get_redis():
+#    from src.app_factory import redis_client
+#    return redis_client
 
 
 router = APIRouter(prefix="/redis", tags=["Redis"])
@@ -42,7 +42,7 @@ logger = get_logger('app.api.redis')
 # === БАЗОВЫЕ ОПЕРАЦИИ СО СТРОКАМИ ===
 
 @router.post("/set")
-async def set_value(request: SetValueRequest, redis: redis_async.Redis = Depends(get_redis)):
+async def set_value(request: SetValueRequest, redis: AsyncRedisClientDep):
     """Установить значение ключа с опциональным TTL"""
     try:
         if request.expire:
@@ -55,7 +55,7 @@ async def set_value(request: SetValueRequest, redis: redis_async.Redis = Depends
 
 
 @router.get("/get/{key}")
-async def get_value(key: str, redis: redis_async.Redis = Depends(get_redis)):
+async def get_value(key: str, redis: AsyncRedisClientDep):
     """Получить значение по ключу"""
     try:
         value = await redis.get(key)
@@ -67,7 +67,7 @@ async def get_value(key: str, redis: redis_async.Redis = Depends(get_redis)):
 
 
 @router.delete("/delete/{key}")
-async def delete_key(key: str, redis: redis_async.Redis = Depends(get_redis)):
+async def delete_key(key: str, redis: AsyncRedisClientDep):
     """Удалить ключ"""
     try:
         deleted = await redis.delete(key)
@@ -81,7 +81,7 @@ async def delete_key(key: str, redis: redis_async.Redis = Depends(get_redis)):
 # === ОПЕРАЦИИ СО СПИСКАМИ ===
 
 @router.post("/list/add")
-async def add_to_list(request: ListAddRequest, redis: redis_async.Redis = Depends(get_redis)):
+async def add_to_list(request: ListAddRequest, redis: AsyncRedisClientDep):
     """Добавить элемент в список с ограничением размера"""
     try:
         # Добавляем в начало списка
@@ -101,7 +101,12 @@ async def add_to_list(request: ListAddRequest, redis: redis_async.Redis = Depend
 
 
 @router.get("/list/{key}")
-async def get_list(key: str, start: int = 0, end: int = -1, redis: redis_async.Redis = Depends(get_redis)):
+async def get_list(
+        redis: AsyncRedisClientDep,
+        key: str,
+        start: int = 0,
+        end: int = -1
+        ):
     """Получить элементы списка"""
     try:
         items = await redis.lrange(key, start, end)
@@ -119,7 +124,7 @@ async def get_list(key: str, start: int = 0, end: int = -1, redis: redis_async.R
 # === ОПЕРАЦИИ С ХЕШАМИ ===
 
 @router.post("/hash/set")
-async def set_hash_field(request: HashSetRequest, redis: redis_async.Redis = Depends(get_redis)):
+async def set_hash_field(request: HashSetRequest, redis: AsyncRedisClientDep):
     """Установить поле в хеше"""
     try:
         await redis.hset(request.key, request.field, request.value)
@@ -132,7 +137,7 @@ async def set_hash_field(request: HashSetRequest, redis: redis_async.Redis = Dep
 
 
 @router.get("/hash/{key}")
-async def get_hash(key: str, redis: redis_async.Redis = Depends(get_redis)):
+async def get_hash(key: str, redis: AsyncRedisClientDep):
     """Получить все поля хеша"""
     try:
         hash_data = await redis.hgetall(key)
@@ -144,7 +149,7 @@ async def get_hash(key: str, redis: redis_async.Redis = Depends(get_redis)):
 
 
 @router.get("/hash/{key}/{field}")
-async def get_hash_field(key: str, field: str, redis: redis_async.Redis = Depends(get_redis)):
+async def get_hash_field(key: str, field: str, redis: AsyncRedisClientDep):
     """Получить конкретное поле хеша"""
     try:
         value = await redis.hget(key, field)
@@ -158,7 +163,7 @@ async def get_hash_field(key: str, field: str, redis: redis_async.Redis = Depend
 # === ИНФОРМАЦИОННЫЕ ЭНДПОИНТЫ ===
 
 @router.get("/keys")
-async def get_keys(pattern: str = "*", redis: redis_async.Redis = Depends(get_redis)):
+async def get_keys(redis: AsyncRedisClientDep, pattern: str = "*"):
     """Получить список ключей по паттерну"""
     try:
         keys = await redis.keys(pattern)
@@ -168,7 +173,7 @@ async def get_keys(pattern: str = "*", redis: redis_async.Redis = Depends(get_re
 
 
 @router.get("/info/{key}")
-async def get_key_info(key: str, redis: redis_async.Redis = Depends(get_redis)):
+async def get_key_info(key: str, redis: AsyncRedisClientDep):
     """Получить информацию о ключе"""
     try:
         exists = await redis.exists(key)
@@ -191,7 +196,7 @@ async def get_key_info(key: str, redis: redis_async.Redis = Depends(get_redis)):
 # === СЛУЖЕБНЫЕ ЭНДПОИНТЫ ===
 
 @router.get("/ping")
-async def ping_redis(redis: redis_async.Redis = Depends(get_redis)):
+async def ping_redis(redis: AsyncRedisClientDep):
     """Проверить соединение с Redis"""
     try:
         pong = await redis.ping()
@@ -201,7 +206,7 @@ async def ping_redis(redis: redis_async.Redis = Depends(get_redis)):
 
 
 @router.get("/stats")
-async def get_redis_stats(redis: redis_async.Redis = Depends(get_redis)):
+async def get_redis_stats(redis: AsyncRedisClientDep):
     """Получить статистику Redis"""
     try:
         info = await redis.info()
@@ -224,12 +229,12 @@ async def root():
         "message": "Redis FastAPI Integration",
         "endpoints": {
             "docs": "/docs",
-            "set_value": "POST /redis/set",
-            "get_value": "GET /redis/get/{key}",
-            "add_to_list": "POST /redis/list/add",
-            "get_list": "GET /redis/list/{key}",
-            "set_hash": "POST /redis/hash/set",
-            "get_hash": "GET /redis/hash/{key}",
-            "ping": "GET /redis/ping"
+            "set_value": "POST /v1/redis/set",
+            "get_value": "GET /v1/redis/get/{key}",
+            "add_to_list": "POST /v1/redis/list/add",
+            "get_list": "GET /v1/redis/list/{key}",
+            "set_hash": "POST /v1/redis/hash/set",
+            "get_hash": "GET /v1/redis/hash/{key}",
+            "ping": "GET /v1/redis/ping"
         }
     }

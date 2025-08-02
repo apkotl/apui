@@ -44,10 +44,9 @@ async def handle_code(
 ):
     if state not in state_storage:
         raise APIException(
-            detail="State incorrect!",
             status_code=400,
-            type="google_status_incorrect",
-            title="Google status incorrect"
+            type="google_auth",
+            detail="Google State incorrect!",
         )
     else:
         print("State correct")

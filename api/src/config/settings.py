@@ -58,6 +58,7 @@ class Settings(BaseSettings):
     DB_USER: str = Field(...)
     DB_PASSWORD: str = Field(...)
     DB_PORT: str = Field(...)
+    REDIS_PORT: str = Field(...)
     #DB_ADMINER_PORT: str = Field(...)
 
     OAUTH_GOOGLE_CLIENT_ID: str = Field(...)
@@ -115,6 +116,7 @@ if __name__ == "__main__":
     print(f"DB_USER: {settings.DB_USER}")
     print(f"DB_PASSWORD: {settings.DB_PASSWORD}")
     print(f"DB_PORT: {settings.DB_PORT}")
+    print(f"REDIS_PORT: {settings.REDIS_PORT}")
     print(f"--------")
     print(f"OAUTH_GOOGLE_CLIENT_ID: {settings.OAUTH_GOOGLE_CLIENT_ID}")
 

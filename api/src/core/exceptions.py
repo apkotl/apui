@@ -5,6 +5,41 @@ from typing import Any
 
 from fastapi import HTTPException, status
 
+
+class APIException(HTTPException):
+    type: str
+    instance: str | None
+
+    def __init__(
+            self,
+            status_code: int = status.HTTP_400_BAD_REQUEST,
+            type: str = "error",
+            detail: str | None = None,
+            headers: dict[str, str] | None = None,
+            instance: str | None = None,
+            **kwargs
+    ) -> None:
+        super().__init__(
+            status_code=status_code,
+            detail=detail,
+            headers=headers
+        )
+        self.type = type
+        self.instance = instance
+        self.extra_data = kwargs
+
+
+class APIException_NotFound(APIException):
+    def __init__(self,
+                 status_code: int = status.HTTP_404_NOT_FOUND,
+                 **data: Any):
+        super().__init__(
+            status_code=status_code,
+            **data
+        )
+
+
+"""
 from src.config import settings
 
 
@@ -12,9 +47,7 @@ PROBLEM_URL_PATH = f"{settings.web_url()}/problems"
 
 #class APIException(StarletteHTTPException):
 class APIException(HTTPException):
-    """
-    Common API Exception class.
-    """
+    #Common API Exception class.
     def __init__(
         self,
         status_code: int,
@@ -30,8 +63,8 @@ class APIException(HTTPException):
         self.title = title
         self.instance = instance
         self.extra_data = extra_data or {} # Init empty dict, if extra_data is None
-
-
+"""
+"""
 class APIException_NotFound(APIException):
     def __init__(
             self,
@@ -60,8 +93,8 @@ class APIException_NotFound(APIException):
                 "resource_id": str(resource_id)
             } if resource_type or resource_id else None
         )
-
-
+"""
+"""
 class APIException_Forbidden(APIException):
     def __init__(
             self,
@@ -81,8 +114,8 @@ class APIException_Forbidden(APIException):
                 "required_role": required_role
             } if required_role else None
         )
-
-
+"""
+"""
 class APIException_BadRequest(APIException):
     def __init__(
             self,
@@ -102,3 +135,4 @@ class APIException_BadRequest(APIException):
                 "invalid_fields": invalid_fields
             } if invalid_fields else None
         )
+"""
