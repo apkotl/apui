@@ -2002,6 +2002,466 @@ async def insert_books(session: AsyncSessionDep):
 
     await session.commit()
 
+    # Author 27 - Lewis Carroll
+    author = AuthorsOrm(
+        first_name="Charles Lutwidge",
+        last_name="Dodgson"
+    )
+    session.add(author)
+    await session.flush()
+
+    book = BooksOrm(
+        isbn="978-0486275437",
+        author_id=author.id,
+        genre_id=1,  # Fantasy
+        reading_level=ReadingLevel.AllAges,
+        title="Alice's Adventures in Wonderland",
+        first_publication_year=1865,
+        volume=96
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486408781",
+        author_id=author.id,
+        genre_id=1,  # Fantasy
+        reading_level=ReadingLevel.AllAges,
+        title="Through the Looking-Glass",
+        first_publication_year=1871,
+        volume=128
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486226378",
+        author_id=author.id,
+        genre_id=4,  # Poetry
+        reading_level=ReadingLevel.AllAges,
+        title="The Hunting of the Snark",
+        first_publication_year=1876,
+        volume=64
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486418803",
+        author_id=author.id,
+        genre_id=1,  # Fantasy
+        reading_level=ReadingLevel.Children,
+        title="Sylvie and Bruno",
+        first_publication_year=1889,
+        volume=256
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486275444",
+        author_id=author.id,
+        genre_id=4,  # Poetry
+        reading_level=ReadingLevel.AllAges,
+        title="Jabberwocky and Other Nonsense Poems",
+        first_publication_year=1871,
+        volume=80
+    )
+    session.add(book)
+
+    await session.commit()
+
+    # Author 28 - Jules Verne
+    author = AuthorsOrm(
+        first_name="Jules",
+        last_name="Verne"
+    )
+    session.add(author)
+    await session.flush()
+
+    book = BooksOrm(
+        isbn="978-0486411101",
+        author_id=author.id,
+        genre_id=3,  # Adventure
+        reading_level=ReadingLevel.AllAges,
+        title="Twenty Thousand Leagues Under the Sea",
+        first_publication_year=1870,
+        volume=448
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486411118",
+        author_id=author.id,
+        genre_id=3,  # Adventure
+        reading_level=ReadingLevel.AllAges,
+        title="Around the World in Eighty Days",
+        first_publication_year=1873,
+        volume=256
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486440880",
+        author_id=author.id,
+        genre_id=6,  # Science Fiction
+        reading_level=ReadingLevel.AllAges,
+        title="Journey to the Center of the Earth",
+        first_publication_year=1864,
+        volume=240
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486457307",
+        author_id=author.id,
+        genre_id=6,  # Science Fiction
+        reading_level=ReadingLevel.AllAges,
+        title="From the Earth to the Moon",
+        first_publication_year=1865,
+        volume=208
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486411125",
+        author_id=author.id,
+        genre_id=3,  # Adventure
+        reading_level=ReadingLevel.AllAges,
+        title="The Mysterious Island",
+        first_publication_year=1874,
+        volume=625
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486457314",
+        author_id=author.id,
+        genre_id=6,  # Science Fiction
+        reading_level=ReadingLevel.AllAges,
+        title="Five Weeks in a Balloon",
+        first_publication_year=1863,
+        volume=208
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486411132",
+        author_id=author.id,
+        genre_id=3,  # Adventure
+        reading_level=ReadingLevel.YoungAdult,
+        title="The Children of Captain Grant",
+        first_publication_year=1867,
+        volume=480
+    )
+    session.add(book)
+
+    await session.commit()
+
+    # Author 29 - Victor Hugo
+    author = AuthorsOrm(
+        first_name="Victor",
+        last_name="Hugo"
+    )
+    session.add(author)
+    await session.flush()
+
+    book = BooksOrm(
+        isbn="978-0451419439",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="Les Misérables",
+        first_publication_year=1862,
+        volume=1232
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0140443530",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.YoungAdult,
+        title="The Hunchback of Notre-Dame",
+        first_publication_year=1831,
+        volume=512
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0141449266",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="Ninety-Three",
+        first_publication_year=1874,
+        volume=368
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0140449273",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="The Toilers of the Sea",
+        first_publication_year=1866,
+        volume=448
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0140449281",
+        author_id=author.id,
+        genre_id=4,  # Poetry
+        reading_level=ReadingLevel.Adult,
+        title="Selected Poems",
+        first_publication_year=1829,
+        volume=256
+    )
+    session.add(book)
+
+    await session.commit()
+
+    # Author 30 - George Orwell
+    author = AuthorsOrm(
+        first_name="Eric Arthur",
+        last_name="Blair"
+    )
+    session.add(author)
+    await session.flush()
+
+    book = BooksOrm(
+        isbn="978-0451524935",
+        author_id=author.id,
+        genre_id=6,  # Science Fiction
+        reading_level=ReadingLevel.Adult,
+        title="1984",
+        first_publication_year=1949,
+        volume=328
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0451526342",
+        author_id=author.id,
+        genre_id=6,  # Science Fiction
+        reading_level=ReadingLevel.YoungAdult,
+        title="Animal Farm",
+        first_publication_year=1945,
+        volume=112
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0156372084",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="Homage to Catalonia",
+        first_publication_year=1938,
+        volume=232
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0156421171",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="Down and Out in Paris and London",
+        first_publication_year=1933,
+        volume=213
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0156372077",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="The Road to Wigan Pier",
+        first_publication_year=1937,
+        volume=264
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0156787451",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="Burmese Days",
+        first_publication_year=1934,
+        volume=287
+    )
+    session.add(book)
+
+    await session.commit()
+
+    # Author 31 - Leo Tolstoy
+    author = AuthorsOrm(
+        first_name="Leo",
+        last_name="Tolstoy"
+    )
+    session.add(author)
+    await session.flush()
+
+    book = BooksOrm(
+        isbn="978-0143039990",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="War and Peace",
+        first_publication_year=1869,
+        volume=1225
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0143035008",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="Anna Karenina",
+        first_publication_year=1877,
+        volume=838
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486401355",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="The Death of Ivan Ilyich",
+        first_publication_year=1886,
+        volume=96
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486270401",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="The Kreutzer Sonata",
+        first_publication_year=1889,
+        volume=128
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486401362",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="Resurrection",
+        first_publication_year=1899,
+        volume=576
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486270418",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.YoungAdult,
+        title="The Cossacks",
+        first_publication_year=1863,
+        volume=192
+    )
+    session.add(book)
+
+    await session.commit()
+
+    # Author 32 - Fyodor Dostoevsky
+    author = AuthorsOrm(
+        first_name="Fyodor",
+        last_name="Dostoevsky"
+    )
+    session.add(author)
+    await session.flush()
+
+    book = BooksOrm(
+        isbn="978-0486454115",
+        author_id=author.id,
+        genre_id=5,  # Mystery
+        reading_level=ReadingLevel.Adult,
+        title="Crime and Punishment",
+        first_publication_year=1866,
+        volume=671
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486437910",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="The Brothers Karamazov",
+        first_publication_year=1880,
+        volume=824
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486452623",
+        author_id=author.id,
+        genre_id=8,  # Thriller
+        reading_level=ReadingLevel.Adult,
+        title="Notes from Underground",
+        first_publication_year=1864,
+        volume=136
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486437927",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.Adult,
+        title="The Idiot",
+        first_publication_year=1869,
+        volume=656
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486437934",
+        author_id=author.id,
+        genre_id=8,  # Thriller
+        reading_level=ReadingLevel.Adult,
+        title="Demons",
+        first_publication_year=1872,
+        volume=768
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486452630",
+        author_id=author.id,
+        genre_id=2,  # Historical Fiction
+        reading_level=ReadingLevel.YoungAdult,
+        title="Poor Folk",
+        first_publication_year=1846,
+        volume=128
+    )
+    session.add(book)
+
+    book = BooksOrm(
+        isbn="978-0486437941",
+        author_id=author.id,
+        genre_id=8,  # Thriller
+        reading_level=ReadingLevel.Adult,
+        title="The Gambler",
+        first_publication_year=1867,
+        volume=144
+    )
+    session.add(book)
+
+    await session.commit()
+
+
+
+
+
 
 
 
