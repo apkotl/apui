@@ -2,7 +2,7 @@ import time
 import uuid
 from fastapi import Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
-from src.config.logging import get_logger
+from src.logging import get_logger
 
 logger = get_logger('app.requests')
 

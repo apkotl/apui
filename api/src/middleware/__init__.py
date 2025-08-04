@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from src.core import const
 from src.config import settings
 
 from .cors import CORS_CONFIG_PROD, CORS_CONFIG_DEV

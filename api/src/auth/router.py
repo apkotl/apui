@@ -6,9 +6,10 @@ import jwt
 import aiohttp
 
 from src.core.exceptions import APIException
-from src.shemas.auth import GoogleUriTestResponse
+from .schemas import GoogleUriTestResponse
 from src.config import settings
-from src.config.google_oauth import generate_google_oauth_redirect_uri
+
+from .config import generate_google_oauth_redirect_uri
 
 from src.state_storage import state_storage
 

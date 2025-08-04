@@ -3,7 +3,7 @@ from sqlalchemy import select
 
 from src.databases.dependencies import AsyncSessionDep
 
-from src.models.books import BookModel
+from src.art.models import BookModel
 
 
 from src.shemas.books import (
@@ -12,7 +12,7 @@ from src.shemas.books import (
     ListBooksResponse
 )
 
-from src.config.logging import get_logger
+from src.logging import get_logger
 
 from src.core.exceptions import (
         APIException_NotFound

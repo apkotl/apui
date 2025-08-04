@@ -1,7 +1,7 @@
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.orm.base import BaseOrm
+from src.core.models import BaseOrm
 
 
 async def setup_database(session: AsyncSession):

@@ -7,7 +7,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from starlette import status
 
-from src.dto.api_response import ResponseSchema, ResponseStatus, ErrorDetail
+from src.core.schemas import ResponseSchema, ResponseStatus, ErrorDetail
 from src.core.exceptions import APIException
 from src.config import settings
 

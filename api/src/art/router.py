@@ -12,7 +12,7 @@ from src.shemas.books import (
     ListBooksResponse
 )
 
-from src.config.logging import get_logger
+from src.logging import get_logger
 
 from src.core.exceptions import (
         APIException_NotFound

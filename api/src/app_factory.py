@@ -4,10 +4,10 @@ from fastapi import FastAPI
 #import redis.asyncio as redis
 
 from src.exceptions import apply_exception_handlers
-from src.api import apply_routers
+from src.routers import apply_routers
 from src.middleware import apply_middleware
 
-from src.config.logging import setup_logging, get_logger
+from src.logging import setup_logging, get_logger
 
 logger = setup_logging()
 

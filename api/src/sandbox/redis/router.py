@@ -1,12 +1,9 @@
-#from redis import Redis
-#import redis.asyncio as redis_async
-
 from fastapi import HTTPException, Depends, APIRouter
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 
 from src.databases.dependencies import AsyncRedisClientDep
-from src.config.logging import get_logger
+from src.logging import get_logger
 
 
 

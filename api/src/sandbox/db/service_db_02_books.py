@@ -1,6 +1,6 @@
 from src.databases.dependencies import AsyncSessionDep
 
-from src.orm.books import (
+from src.art.models import (
     BookGenresOrm,
     BooksOrm,
     AuthorsOrm,
@@ -8,7 +8,7 @@ from src.orm.books import (
 )
 
 
-async def insert_bookgenres(session: AsyncSessionDep):
+async def insert_book_genres(session: AsyncSessionDep):
     genre = BookGenresOrm(name="Fantasy")
     session.add(genre)
     genre = BookGenresOrm(name="Historical Fiction")
@@ -29,7 +29,7 @@ async def insert_bookgenres(session: AsyncSessionDep):
 
 
 async def insert_books(session: AsyncSessionDep):
-    await insert_bookgenres(session)
+    await insert_book_genres(session)
 
     # Author 0
     author = AuthorsOrm(

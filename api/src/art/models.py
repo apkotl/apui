@@ -1,10 +1,25 @@
+from sqlalchemy.orm import Mapped, mapped_column
+from src.core.models import Base
+
+
+### OLD
+class BookModel(Base):
+    __tablename__ = 'books'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str]
+    author: Mapped[str]
+
+
+
+### NEW
 import datetime
 import enum
 
 from sqlalchemy import ForeignKey, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.orm.base import (
+
+from src.core.models import (
     BaseOrm,
     pk_column,
     str_column,

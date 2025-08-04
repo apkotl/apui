@@ -7,7 +7,7 @@ from enum import Enum
 PRODUCTION: str = "production"
 DEVELOPMENT: str = "development"
 
-class Protocol(str, Enum):
+class WebProtocol(str, Enum):
     HTTP = "http"
     HTTPS = "https"
 

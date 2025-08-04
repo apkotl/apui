@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field
 
 
 from src.core.exceptions import APIException, APIException_NotFound
-from src.dto.api_response import ResponseSchema, ResponseStatus
-from src.config.settings import settings
+from src.core.schemas import ResponseSchema, ResponseStatus
+from src.config import settings
 
 router = APIRouter(tags=["Info"])
 

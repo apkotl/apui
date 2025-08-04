@@ -6,10 +6,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field, SecretStr
 from pathlib import Path
 
-import src.core.const as const
+import src.core.constants as const
 
 ENV = os.getenv("ENVIRONMENT", default="development")
-BASE_DIR = str(Path(__file__).resolve().parents[3])
+BASE_DIR = str(Path(__file__).resolve().parents[2])
 ENV_FILE_FULL_NAME = f"{BASE_DIR}{"" if BASE_DIR == "/" else os.sep}.env.{ENV}"
 
 # singleton decorator
@@ -45,12 +45,12 @@ class Settings(BaseSettings):
     APP_WEB_VERSION: str = Field(...)
 
     WEB_HOST: str = Field(...)
-    WEB_PROTOCOL: const.Protocol = Field(...)
+    WEB_PROTOCOL: const.WebProtocol = Field(...)
     WEB_PORT: int = Field(...)
     FRONTEND_PORT: int = Field(...)
 
     API_HOST: str = Field(...)
-    API_PROTOCOL: const.Protocol = Field(...)
+    API_PROTOCOL: const.WebProtocol = Field(...)
     API_PORT: int = Field(...)
     #API_UVICORN_PORT: str = Field(...)
 
@@ -67,9 +67,9 @@ class Settings(BaseSettings):
 
     def web_url(self, path: str = ''):
         _port = ""
-        if self.WEB_PROTOCOL == const.Protocol.HTTP and self.WEB_PORT == 80:
+        if self.WEB_PROTOCOL == const.WebProtocol.HTTP and self.WEB_PORT == 80:
             pass
-        elif self.WEB_PROTOCOL == const.Protocol.HTTPS and self.WEB_PORT == 443:
+        elif self.WEB_PROTOCOL == const.WebProtocol.HTTPS and self.WEB_PORT == 443:
             pass
         else:
             _port = f":{self.WEB_PORT}"
@@ -78,9 +78,9 @@ class Settings(BaseSettings):
 
     def frontend_url(self, path: str = ''):
         _port = ""
-        if self.WEB_PROTOCOL == const.Protocol.HTTP and self.FRONTEND_PORT == 80:
+        if self.WEB_PROTOCOL == const.WebProtocol.HTTP and self.FRONTEND_PORT == 80:
             pass
-        elif self.WEB_PROTOCOL == const.Protocol.HTTPS and self.FRONTEND_PORT == 443:
+        elif self.WEB_PROTOCOL == const.WebProtocol.HTTPS and self.FRONTEND_PORT == 443:
             pass
         else:
             _port = f":{self.FRONTEND_PORT}"
