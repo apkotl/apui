@@ -15,7 +15,7 @@ router = APIRouter(tags=["database_setup"])
 async def db_setup(service: ServiceDbDep):
     try:
         await service.setup_database()
-        await service.insert_books()
+        await service.insert_data()
     except Exception as exp:
         raise APIException(
             type="db",

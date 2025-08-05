@@ -3,18 +3,18 @@ import datetime
 from sqlalchemy import String, Integer, text, DateTime
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 
-
+"""
 # OLD
 class Base(DeclarativeBase):
     pass
-
+"""
 
 # NEW
 def pk_column() -> Mapped[int]:
     return mapped_column(Integer, primary_key=True)
 
-def str_column(length: int = 256) -> Mapped[str]:
-    return mapped_column(String(length))
+def str_column(length: int = 256, **kwargs) -> Mapped[str]:
+    return mapped_column(String(length), **kwargs)
 
 def created_at_column() -> Mapped[datetime.datetime]:
     return mapped_column(
@@ -26,7 +26,7 @@ def updated_at_column() -> Mapped[datetime.datetime]:
     return mapped_column(
         DateTime(timezone=False),
         server_default=text("TIMEZONE('utc', now())"),
-        onupdate=datetime.datetime.now(datetime.UTC),
+        onupdate=text("TIMEZONE('utc', now())"),
     )
 
 

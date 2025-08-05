@@ -1,17 +1,22 @@
 import time
+from enum import Enum
 
-from pydantic import BaseModel, Field
-from typing import Generic, TypeVar, Optional, List, Dict, Any
+from pydantic import BaseModel, Field, ConfigDict
+from typing import Generic, TypeVar, Optional, List, Dict, Any, Literal
+
+from src.config import settings
 
 
-### OLD
-# Определяем TypeVar для гибкости в data
+# Defining TypeVar for flexibility in data
 T = TypeVar("T")
 
+"""
+### OLD
+
 class BaseResponse(BaseModel, Generic[T]):
-    """
-    Базовая Pydantic модель для всех успешных ответов API.
-    """
+    
+    #Базовая Pydantic модель для всех успешных ответов API.
+    
     status: str = Field(..., description="Статус ответа (например, 'success', 'error').")
     message: str | None = Field(None, description="Человекочитаемое сообщение об ответе.")
     data_type: str = Field(..., description="Тип данных, содержащихся в объекте data")
@@ -28,21 +33,10 @@ class BaseResponse(BaseModel, Generic[T]):
         super().__init__(**data)
 
         #self.timestamp = time.time() # Автоматически заполняем timestamp
+"""
+
 
 ### NEW
-import time
-from enum import Enum
-
-from pydantic import BaseModel, Field, ConfigDict
-from typing import Generic, TypeVar, Optional, List, Dict, Any, Literal
-
-from src.config import settings
-
-
-# Defining TypeVar for flexibility in data
-###T = TypeVar("T")
-
-
 class ResponseStatus(str, Enum):
     OK = "ok"
     ERROR = "error"
@@ -79,3 +73,15 @@ class ResponseSchema(BaseModel, Generic[T]):
     #extra_data: Any | None = Field(default=None)
 
 
+class ListResponse(BaseModel, Generic[T]):
+    """Ответ со списком T объектов"""
+    items: List[T]
+    pagination: dict
+    message: str = ""
+
+class PaginationInfo(BaseModel):
+    """Информация о пагинации"""
+    total: int = Field(description="Общее количество записей")
+    offset: int = Field(description="Текущее смещение")
+    limit: int = Field(description="Количество записей на странице")
+    has_more: bool = Field(description="Есть ли еще записи")

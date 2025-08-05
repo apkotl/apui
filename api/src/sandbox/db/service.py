@@ -18,7 +18,7 @@ class ServiceDb:
     async def setup_database(self) -> None:
         await setup_database(self.session)
 
-    async def insert_books(self) -> None:
+    async def insert_data(self) -> None:
         await insert_books(self.session)
 
 

@@ -1,9 +1,9 @@
 from typing import Any
 
-from src.core.schemas import BaseResponse
+from src.core.schemas import ResponseSchema
 
 
-class GoogleUriTestResponse(BaseResponse[str]):
+class GoogleUriTestResponse(ResponseSchema[str]):
 
     message: str = "Google Uri Test Response."
     status: str = "success"

@@ -6,7 +6,7 @@ from src.core.exceptions import APIException, APIException_NotFound
 from src.core.schemas import ResponseSchema, ResponseStatus
 from src.config import settings
 
-router = APIRouter(tags=["Info"])
+router = APIRouter(tags=["info"])
 
 
 @router.get("/")

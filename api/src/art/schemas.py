@@ -1,47 +1,96 @@
+from enum import Enum
 from typing import Generic, TypeVar, Optional, List, Dict, Any
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, validator
 
-from src.core.schemas import BaseResponse
+from .models import ReadingLevel
 
 
-class NewBookSchema(BaseModel):
+#from src.core.schemas import BaseResponse
+
+
+
+class AuthorBase(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    title: str
-    author: str
+    first_name: str
+    last_name: str
 
+class AuthorCreate(AuthorBase):
+    pass
 
-class BookSchema(NewBookSchema):
+class Author(AuthorBase):
     id: int
 
 
-# Специфичные модели ответов на основе BaseResponse
-class SingleBookResponse(BaseResponse[BookSchema]):
-    """
-    Ответ для получения одной книги.
-    """
-    # Здесь не нужно добавлять поля, так как они уже определены в BaseResponse<Book>
-    # Но можно переопределить defaults, если нужно
-    message: str = "Book retrieved successfully."
-    status: str = "success"
-    data_type: str = "book"
 
-    def __init__(self, data: BookSchema = None, message: str = message, **kwargs: Any):
-        super().__init__(data=data, message=message, **kwargs)
+class BookGenreBase(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    name: str
 
-class ListBooksResponse(BaseResponse[List[BookSchema]]):
-    """
-    Ответ для получения списка книг.
-    """
-    message: str = "Books list retrieved successfully."
-    status: str = "success"
-    data_type: str = "books"
+class BookGenreCreate(BookGenreBase):
+    pass
 
-    # Можно добавить метаданные для списков, например, пагинацию
-    total_count: int = Field(0, description="Общее количество элементов.")
-    page: int = Field(1, description="Текущая страница.")
-    page_size: int = Field(10, description="Размер страницы.")
+class BookGenre(BookGenreBase):
+    id: int
 
-    # Переопределяем __init__ для удобства, чтобы передавать total_count и т.д.
-    def __init__(self, data: List[BookSchema], total_count: int, page: int = 1, page_size: int = 10, **kwargs: Any):
-        super().__init__(data=data, total_count=total_count, page=page, page_size=page_size, **kwargs)
 
+
+class BookBase(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    isbn: str
+    author_id: int
+    genre_id: int
+    reading_level: ReadingLevel
+    title: str
+    publication_year: int
+    volume: int | None
+
+class BookCreate(BookBase):
+    pass
+
+class Book(BookBase):
+    id: int
+
+
+
+class AuthorOrderBy(str, Enum):
+    ID_ASC = "id_asc"
+    ID_DESC = "id_desc"
+    LAST_NAME_ASC = "last_name_asc"
+    LAST_NAME_DESC = "last_name_desc"
+
+
+class BookGenreOrderBy(str, Enum):
+    ID_ASC = "id_asc"
+    ID_DESC = "id_desc"
+    NAME_ASC = "name_asc"
+    NAME_DESC = "name_desc"
+    CREATED_AT_ASC = "created_at_asc"
+    CREATED_AT_DESC = "created_at_desc"
+
+
+class BookOrderBy(str, Enum):
+    ID_ASC = "id_asc"
+    ID_DESC = "id_desc"
+    TITLE_ASC = "title_asc"
+    TITLE_DESC = "title_desc"
+    AUTHOR_ASC = "author_asc"
+    AUTHOR_DESC = "author_desc"
+    CREATED_AT_ASC = "created_at_asc"
+    CREATED_AT_DESC = "created_at_desc"
+
+
+
+class BookGenreListQueryParams(BaseModel):
+    """Параметры запроса для получения списка книг"""
+    offset: int = Field(default=0, ge=0, description="Смещение для пагинации")
+    limit: int = Field(default=10, ge=1, le=100, description="Количество записей (максимум 100)")
+    order_by: BookGenreOrderBy = Field(default=BookOrderBy.ID_ASC, description="Поле и направление сортировки")
+    search: Optional[str] = Field(default=None, min_length=1, max_length=255, description="Поиск по названию или автору")
+
+    @validator('search')
+    def validate_search(cls, v):
+        if v is not None:
+            v = v.strip()
+            if len(v) == 0:
+                return None
+        return v

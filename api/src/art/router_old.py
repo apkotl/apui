@@ -6,7 +6,7 @@ from src.databases.dependencies import AsyncSessionDep
 from src.art.models import BookModel
 
 
-from src.shemas.books import (
+from .schemas import (
     NewBookSchema, BookSchema,
     SingleBookResponse,
     ListBooksResponse

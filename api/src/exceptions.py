@@ -24,7 +24,7 @@ async def api_exception_handler(request: Request, exc: APIException) -> JSONResp
         status=ResponseStatus.ERROR,
         data=None,
         detail=exc.detail,
-        errors=[ErrorDetail(type=exc.type, msg=exc.detail)],
+        errors=[ErrorDetail(type=exc.type, msg=exc.detail, input=exc.input)],
         instance=exc.instance if exc.instance else str(request.url)
     #).model_dump(exclude_none=True)
     ).model_dump()

@@ -8,12 +8,14 @@ from fastapi import HTTPException, status
 
 class APIException(HTTPException):
     type: str
+    input: str | int
     instance: str | None
 
     def __init__(
             self,
             status_code: int = status.HTTP_400_BAD_REQUEST,
             type: str = "error",
+            input: str = "",
             detail: str | None = None,
             headers: dict[str, str] | None = None,
             instance: str | None = None,
@@ -25,6 +27,7 @@ class APIException(HTTPException):
             headers=headers
         )
         self.type = type
+        self.input = input
         self.instance = instance
         self.extra_data = kwargs
 
