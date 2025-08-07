@@ -3,13 +3,7 @@ import datetime
 from sqlalchemy import String, Integer, text, DateTime
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 
-"""
-# OLD
-class Base(DeclarativeBase):
-    pass
-"""
 
-# NEW
 def pk_column() -> Mapped[int]:
     return mapped_column(Integer, primary_key=True)
 

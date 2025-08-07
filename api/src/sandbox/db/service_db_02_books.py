@@ -1,4 +1,4 @@
-from src.databases.dependencies import AsyncSessionDep
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.art.models import (
     BookGenresOrm,
@@ -8,7 +8,7 @@ from src.art.models import (
 )
 
 
-async def insert_book_genres(session: AsyncSessionDep):
+async def insert_book_genres(session: AsyncSession):
     genre = BookGenresOrm(name="Fantasy")
     session.add(genre)
     genre = BookGenresOrm(name="Historical Fiction")
@@ -28,7 +28,7 @@ async def insert_book_genres(session: AsyncSessionDep):
     await  session.commit()
 
 
-async def insert_books(session: AsyncSessionDep):
+async def insert_books(session: AsyncSession):
     await insert_book_genres(session)
 
     # Author 0

@@ -5,9 +5,6 @@ from pydantic import BaseModel, ConfigDict, Field, validator
 from .models import ReadingLevel
 
 
-#from src.core.schemas import BaseResponse
-
-
 
 class AuthorBase(BaseModel):
     model_config = ConfigDict(from_attributes=True)

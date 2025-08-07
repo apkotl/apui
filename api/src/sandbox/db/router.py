@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from src.core.schemas import ResponseSchema
 from src.core.exceptions import APIException
 
-from .service import ServiceDbDep
+from .service import get_db_service, DbService
 
 router = APIRouter(tags=["database_setup"])
 
@@ -12,7 +12,7 @@ router = APIRouter(tags=["database_setup"])
     name="Reset and Setup Database",
     description="Drop and Create all metadata. Initializing the database with initial data."
 )
-async def db_setup(service: ServiceDbDep):
+async def db_setup(service: DbService = Depends(get_db_service)):
     try:
         await service.setup_database()
         await service.insert_data()
