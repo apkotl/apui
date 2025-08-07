@@ -26,16 +26,15 @@ class BookGenreService(IBookGenreService):
             return None
         return BookGenre.model_validate(book_genre)
 
-    async def delete_book_genre(self, book_id: int) -> bool:
-        return await self.book_genre_repository.delete(book_id)
+    async def delete_book_genre(self, book_genre_id: int) -> bool:
+        return await self.book_genre_repository.delete(book_genre_id)
 
     async def get_book_genres_list(self, params: BookGenreListQueryParams) -> ListResponse[BookGenre]:
-        """Получить список книг с пагинацией, сортировкой и поиском"""
+        """Получить список жанров книг с пагинацией, сортировкой и поиском"""
 
-        book_genres_orm, total_count = await self.book_genre_repository.get_book_genres_with_pagination(params)
+        book_genres_orm, total_count = await self.book_genre_repository.get_with_pagination(params)
 
         # Сериализуем жанры книг
-        #serialized_books = [serialize_book(book) for book in books]
         book_genres = [BookGenre.model_validate(book_genre_orm) for book_genre_orm in book_genres_orm]
 
         # Создаем информацию о пагинации
@@ -49,7 +48,7 @@ class BookGenreService(IBookGenreService):
         }
 
         # Формируем сообщение
-        message = f"Found {total_count} books"
+        message = f"Found {total_count} book genres"
         if params.search:
             message += f" matching '{params.search}'"
 

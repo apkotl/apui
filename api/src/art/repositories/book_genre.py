@@ -44,11 +44,11 @@ class BookGenreRepository(IBookGenreRepository):
         await self.session.commit()
         return True
 
-    async def get_book_genres_with_pagination(
+    async def get_with_pagination(
             self,
             params: BookGenreListQueryParams
     ) -> Tuple[List[BookGenre], int]:
-        """Получить список книг с пагинацией, сортировкой и поиском"""
+        """Получить список жанров книг с пагинацией, сортировкой и поиском"""
 
         # Базовый запрос
         base_query = select(BookGenresOrm)
@@ -57,8 +57,6 @@ class BookGenreRepository(IBookGenreRepository):
         # Добавляем поиск если указан
         if params.search:
             search_filter = or_(
-                #BookModel.title.ilike(f"%{params.search}%"),
-                #BookModel.author.ilike(f"%{params.search}%")
                 BookGenresOrm.name.ilike(f"%{params.search}%")
             )
             base_query = base_query.where(search_filter)
@@ -88,10 +86,6 @@ class BookGenreRepository(IBookGenreRepository):
             BookGenreOrderBy.ID_DESC: desc(BookGenresOrm.id),
             BookGenreOrderBy.NAME_ASC: asc(BookGenresOrm.name),
             BookGenreOrderBy.NAME_DESC: desc(BookGenresOrm.name),
-            #BookOrderBy.TITLE_ASC: asc(BookModel.title),
-            #BookOrderBy.TITLE_DESC: desc(BookModel.title),
-            #BookOrderBy.AUTHOR_ASC: asc(BookModel.author),
-            #BookOrderBy.AUTHOR_DESC: desc(BookModel.author),
             BookGenreOrderBy.CREATED_AT_ASC: asc(BookGenresOrm.created_at) if hasattr(BookGenresOrm, 'created_at') else asc(
                 BookGenresOrm.id),
             BookGenreOrderBy.CREATED_AT_DESC: desc(BookGenresOrm.created_at) if hasattr(BookGenresOrm, 'created_at') else desc(

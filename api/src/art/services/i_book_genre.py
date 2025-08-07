@@ -24,5 +24,5 @@ class IBookGenreService(ABC):
 
     @abstractmethod
     async def get_book_genres_list(self, params: BookGenreListQueryParams) -> ListResponse[BookGenre]:
-        """Получить список книг с пагинацией и сортировкой"""
+        """Получить список жанров книг с пагинацией и сортировкой"""
         pass

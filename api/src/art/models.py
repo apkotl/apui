@@ -59,7 +59,7 @@ class BooksOrm(BaseOrm):
     genre_id: Mapped[int | None] = mapped_column(ForeignKey("art.book_genres.id", ondelete="SET NULL"))
     reading_level: Mapped[ReadingLevel] = mapped_column(Enum(ReadingLevel, schema='art', name='reading_level'))
     title: Mapped[str] = str_column()
-    first_publication_year: Mapped[int]
+    publication_year: Mapped[int]
     volume: Mapped[int | None]
     created_at: Mapped[datetime.datetime] = created_at_column()
     updated_at: Mapped[datetime.datetime] = updated_at_column()
@@ -85,6 +85,7 @@ class AuthorsOrm(BaseOrm):
 
     books: Mapped[list["BooksOrm"]] = relationship(
         back_populates="author",
+        order_by="BooksOrm.publication_year.asc(), BooksOrm.id.asc()",
     )
 
     books_adult: Mapped[list["BooksOrm"]] = relationship(

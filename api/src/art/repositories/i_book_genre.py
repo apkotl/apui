@@ -6,23 +6,23 @@ from ..schemas import BookGenre, BookGenreCreate, BookGenreListQueryParams
 
 class IBookGenreRepository(ABC):
     @abstractmethod
-    async def get_by_id(self, book_id: int) -> Optional[BookGenresOrm]:
+    async def get_by_id(self, book_genre_id: int) -> Optional[BookGenresOrm]:
         pass
 
     @abstractmethod
-    async def create(self, book_data: BookGenreCreate) -> BookGenresOrm:
+    async def create(self, book_genre_data: BookGenreCreate) -> BookGenresOrm:
         pass
 
     @abstractmethod
-    async def update(self, book_id: int, book_data: BookGenreCreate) -> Optional[BookGenresOrm]:
+    async def update(self, book_genre_id: int, book_genre_data: BookGenreCreate) -> Optional[BookGenresOrm]:
         pass
 
     @abstractmethod
-    async def delete(self, book_id: int) -> bool:
+    async def delete(self, book_genre_id: int) -> bool:
         pass
 
     @abstractmethod
-    async def get_book_genres_with_pagination(
+    async def get_with_pagination(
             self,
             params: BookGenreListQueryParams
     ) -> Tuple[List[BookGenre], int]:

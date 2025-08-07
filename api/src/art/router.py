@@ -2,58 +2,158 @@ from typing import Optional
 
 from fastapi import APIRouter, Request, Path, Query, HTTPException, status
 from fastapi.params import Depends
-from sqlalchemy import select
+
 
 from src.core.schemas import ResponseSchema, ListResponse
-from src.databases.dependencies import AsyncSessionDep
 from src.logging import get_logger
 from src.core.exceptions import (
         APIException,
         APIException_NotFound
 )
 
-from .models import AuthorsOrm, BookGenresOrm, BooksOrm
 from .schemas import (
-    AuthorCreate, Author,
-    BookGenreCreate, BookGenre,
-    BookCreate, Book, BookGenreOrderBy, BookGenreListQueryParams,
+    AuthorCreate, Author, AuthorWithBooks, AuthorOrderBy, AuthorListQueryParams,
+    BookGenreCreate, BookGenre, BookGenreOrderBy, BookGenreListQueryParams,
+    BookCreate, Book, BookOrderBy, BookListQueryParams, BookWithObjects,
 )
+from .services.i_author import IAuthorService
 from .services.i_book_genre import IBookGenreService
-from .dependencies import get_book_genre_service
+from .services.i_book import IBookService
+from .dependencies import (
+        get_author_service,
+        get_book_genre_service,
+        get_book_service
+)
 
 router = APIRouter(prefix="/art", tags=["art"])
 logger = get_logger('api.art')
-
 
 
 def create_not_found_detail(item_name: str, item_id: int) -> str:
     return f"{item_name.title()} with id='{item_id}' not found."
 
 
-
-# OLD (get all)
-"""
-@router.get("/book_genres")
-async def get_book_genres(session: AsyncSessionDep, request: Request):
+###################################################
+# Authors (begin)
+###################################################
+@router.get("/authors/{id}")
+async def get_author(
+        request: Request,
+        author_id: int = Path(..., alias='id'),
+        author_service: IAuthorService = Depends(get_author_service)
+) -> ResponseSchema[Author]:
     request_id = getattr(request.state, 'request_id', 'unknown')
-    logger.info(f"[{request_id}] Getting all books")
+    logger.info(f"[{request_id}] Getting author with ID: {author_id}")
 
     try:
-        query = select(BookModel).order_by('id')
-        result = await session.execute(query)
-        books = result.scalars().all()
-        logger.info(f"[{request_id}] Successfully retrieved all books")
-        return ListBooksResponse(
-            data=[serialize_book(b) for b in books],
-            total_count=1000
+        author = await author_service.get_author_by_id(author_id)
+        if author is None:
+            not_found_detail = create_not_found_detail("author", author_id)
+            logger.warning(f"[{request_id}] {not_found_detail}")
+            raise APIException_NotFound(
+                detail=not_found_detail,
+                type="database:author:id",
+                input=str(author_id)
+            )
+
+        logger.info(f"[{request_id}] Successfully retrieved author: {author_id}")
+        return ResponseSchema[Author](
+            detail=f"Get author with id: {author_id}",
+            data=author
         )
+
     except HTTPException as e:
         raise
     except Exception as e:
-        logger.error(f"[{request_id}] Error getting all books: {str(e)}", exc_info=True)
-        raise
-"""
+        logger.error(f"[{request_id}] Error getting author {author_id}: {str(e)}", exc_info=True)
+        raise APIException(
+            detail=str(e)
+        )
 
+
+@router.get("/authors_with_books/{id}")
+async def get_author_with_books(
+        request: Request,
+        author_id: int = Path(..., alias='id'),
+        author_service: IAuthorService = Depends(get_author_service)
+) -> ResponseSchema[AuthorWithBooks]:
+    request_id = getattr(request.state, 'request_id', 'unknown')
+    logger.info(f"[{request_id}] Getting author (with books) with ID: {author_id}")
+
+    try:
+        author = await author_service.get_author_by_id_with_books(author_id)
+        if author is None:
+            not_found_detail = create_not_found_detail("author", author_id)
+            logger.warning(f"[{request_id}] {not_found_detail}")
+            raise APIException_NotFound(
+                detail=not_found_detail,
+                type="database:author:id",
+                input=str(author_id)
+            )
+
+        logger.info(f"[{request_id}] Successfully retrieved author: {author_id}")
+        return ResponseSchema[AuthorWithBooks](
+            detail=f"Get author with id: {author_id}",
+            data=author
+        )
+
+    except HTTPException as e:
+        raise
+    except Exception as e:
+        logger.error(f"[{request_id}] Error getting author {author_id}: {str(e)}", exc_info=True)
+        raise APIException(
+            detail=str(e)
+        )
+###################################################
+# Authors (end)
+###################################################
+
+
+
+###################################################
+# Book  (begin)
+###################################################
+@router.get("/books/{id}")
+async def get_book(
+        request: Request,
+        book_id: int = Path(..., alias='id'),
+        book_service: IBookService = Depends(get_book_service)
+) -> ResponseSchema[BookWithObjects]:
+    request_id = getattr(request.state, 'request_id', 'unknown')
+    logger.info(f"[{request_id}] Getting book with ID: {book_id}")
+
+    try:
+        book = await book_service.get_book_by_id(book_id)
+        if book is None:
+            not_found_detail = create_not_found_detail("book", book_id)
+            logger.warning(f"[{request_id}] {not_found_detail}")
+            raise APIException_NotFound(
+                detail=not_found_detail,
+                type="database:book:id",
+                input=str(book_id)
+            )
+
+        logger.info(f"[{request_id}] Successfully retrieved book: {book_id}")
+        return ResponseSchema[BookWithObjects](
+            detail=f"Get book with id: {book_id}",
+            data=book
+        )
+
+    except HTTPException as e:
+        raise
+    except Exception as e:
+        logger.error(f"[{request_id}] Error getting book {book_id}: {str(e)}", exc_info=True)
+        raise APIException(
+            detail=str(e)
+        )
+###################################################
+# Book  (end)
+###################################################
+
+
+###################################################
+# Book Genres (begin)
+###################################################
 @router.get("/book_genres")
 async def get_book_genres(
         request: Request,
@@ -101,9 +201,6 @@ async def get_book_genres(
         raise APIException(
             detail=str(e)
         )
-
-
-
 
 
 @router.get("/book_genres/{id}")
@@ -231,6 +328,8 @@ async def delete_book_genre(
         raise APIException(
             detail=str(e)
         )
-
+###################################################
+# Book Genres (end)
+###################################################
 
 

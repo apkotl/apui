@@ -18,7 +18,7 @@ def apply_routers(app: FastAPI) -> FastAPI:
 
     router_v1.include_router(art_router)
 
-    router_v1.include_router(info_router)
+    #router_v1.include_router(info_router)
     router_v1.include_router(db_router)
     router_v1.include_router(redis_router)
     app.include_router(router_v1)
@@ -28,6 +28,7 @@ def apply_routers(app: FastAPI) -> FastAPI:
 
 
     #app.include_router(redis_router)
+    app.include_router(info_router)
     app.include_router(auth_router)
     #app.include_router(info_router)
     #app.include_router(db_setup_router)

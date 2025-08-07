@@ -44,7 +44,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="The Three-Body Problem",
-        first_publication_year=2008,
+        publication_year=2008,
         volume=390
     )
     session.add(book)
@@ -54,7 +54,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="The Dark Forest",
-        first_publication_year=2008,
+        publication_year=2008,
         volume=400
     )
     session.add(book)
@@ -64,7 +64,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="Death's End",
-        first_publication_year=2010,
+        publication_year=2010,
         volume=592
     )
     session.add(book)
@@ -84,7 +84,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Children,
         title="Harry Potter and the Philosopher's Stone",
-        first_publication_year=1997,
+        publication_year=1997,
         volume=223
     )
     session.add(book)
@@ -95,7 +95,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Children,
         title="Harry Potter and the Chamber of Secrets",
-        first_publication_year=1998,
+        publication_year=1998,
         volume=251
     )
     session.add(book)
@@ -106,7 +106,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Children,
         title="Harry Potter and the Prisoner of Azkaban",
-        first_publication_year=1999,
+        publication_year=1999,
         volume=317
     )
     session.add(book)
@@ -117,7 +117,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="Harry Potter and the Goblet of Fire",
-        first_publication_year=2000,
+        publication_year=2000,
         volume=636
     )
     session.add(book)
@@ -128,7 +128,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="Harry Potter and the Order of the Phoenix",
-        first_publication_year=2003,
+        publication_year=2003,
         volume=766
     )
     session.add(book)
@@ -139,7 +139,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="Harry Potter and the Half-Blood Prince",
-        first_publication_year=2005,
+        publication_year=2005,
         volume=607
     )
     session.add(book)
@@ -150,7 +150,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="Harry Potter and the Deathly Hallows",
-        first_publication_year=2007,
+        publication_year=2007,
         volume=607
     )
     session.add(book)
@@ -171,7 +171,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Waverley",
-        first_publication_year=1814,
+        publication_year=1814,
         volume=448
     )
     session.add(book)
@@ -182,7 +182,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Ivanhoe",
-        first_publication_year=1819,
+        publication_year=1819,
         volume=512
     )
     session.add(book)
@@ -193,7 +193,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Rob Roy",
-        first_publication_year=1817,
+        publication_year=1817,
         volume=464
     )
     session.add(book)
@@ -204,7 +204,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Heart of Midlothian",
-        first_publication_year=1818,
+        publication_year=1818,
         volume=672
     )
     session.add(book)
@@ -215,7 +215,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Kenilworth",
-        first_publication_year=1821,
+        publication_year=1821,
         volume=544
     )
     session.add(book)
@@ -226,7 +226,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Bride of Lammermoor",
-        first_publication_year=1819,
+        publication_year=1819,
         volume=352
     )
     session.add(book)
@@ -247,7 +247,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Three Musketeers",
-        first_publication_year=1844,
+        publication_year=1844,
         volume=625
     )
     session.add(book)
@@ -258,7 +258,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="Twenty Years After",
-        first_publication_year=1845,
+        publication_year=1845,
         volume=704
     )
     session.add(book)
@@ -269,7 +269,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Vicomte of Bragelonne",
-        first_publication_year=1847,
+        publication_year=1847,
         volume=928
     )
     session.add(book)
@@ -280,7 +280,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.Adult,
         title="The Count of Monte Cristo",
-        first_publication_year=1844,
+        publication_year=1844,
         volume=1276
     )
     session.add(book)
@@ -291,7 +291,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Queen Margot",
-        first_publication_year=1845,
+        publication_year=1845,
         volume=688
     )
     session.add(book)
@@ -302,7 +302,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Black Tulip",
-        first_publication_year=1850,
+        publication_year=1850,
         volume=256
     )
     session.add(book)
@@ -313,7 +313,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Man in the Iron Mask",
-        first_publication_year=1847,
+        publication_year=1847,
         volume=480
     )
     session.add(book)
@@ -334,7 +334,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="The Shining",
-        first_publication_year=1977,
+        publication_year=1977,
         volume=447
     )
     session.add(book)
@@ -345,7 +345,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="It",
-        first_publication_year=1986,
+        publication_year=1986,
         volume=1138
     )
     session.add(book)
@@ -356,7 +356,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Carrie",
-        first_publication_year=1974,
+        publication_year=1974,
         volume=199
     )
     session.add(book)
@@ -367,7 +367,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Pet Sematary",
-        first_publication_year=1983,
+        publication_year=1983,
         volume=374
     )
     session.add(book)
@@ -378,7 +378,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Salem's Lot",
-        first_publication_year=1975,
+        publication_year=1975,
         volume=439
     )
     session.add(book)
@@ -389,7 +389,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Misery",
-        first_publication_year=1987,
+        publication_year=1987,
         volume=310
     )
     session.add(book)
@@ -400,7 +400,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Doctor Sleep",
-        first_publication_year=2013,
+        publication_year=2013,
         volume=531
     )
     session.add(book)
@@ -421,7 +421,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Last of the Mohicans",
-        first_publication_year=1826,
+        publication_year=1826,
         volume=384
     )
     session.add(book)
@@ -432,7 +432,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Deerslayer",
-        first_publication_year=1841,
+        publication_year=1841,
         volume=560
     )
     session.add(book)
@@ -443,7 +443,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Pathfinder",
-        first_publication_year=1840,
+        publication_year=1840,
         volume=512
     )
     session.add(book)
@@ -454,7 +454,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Pioneers",
-        first_publication_year=1823,
+        publication_year=1823,
         volume=464
     )
     session.add(book)
@@ -465,7 +465,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Prairie",
-        first_publication_year=1827,
+        publication_year=1827,
         volume=416
     )
     session.add(book)
@@ -476,7 +476,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Pilot",
-        first_publication_year=1824,
+        publication_year=1824,
         volume=448
     )
     session.add(book)
@@ -497,7 +497,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Foundation",
-        first_publication_year=1951,
+        publication_year=1951,
         volume=244
     )
     session.add(book)
@@ -508,7 +508,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Foundation and Empire",
-        first_publication_year=1952,
+        publication_year=1952,
         volume=247
     )
     session.add(book)
@@ -519,7 +519,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Second Foundation",
-        first_publication_year=1953,
+        publication_year=1953,
         volume=279
     )
     session.add(book)
@@ -530,7 +530,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="I, Robot",
-        first_publication_year=1950,
+        publication_year=1950,
         volume=253
     )
     session.add(book)
@@ -541,7 +541,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="The Caves of Steel",
-        first_publication_year=1954,
+        publication_year=1954,
         volume=206
     )
     session.add(book)
@@ -552,7 +552,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="The Naked Sun",
-        first_publication_year=1957,
+        publication_year=1957,
         volume=224
     )
     session.add(book)
@@ -573,7 +573,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="2001: A Space Odyssey",
-        first_publication_year=1968,
+        publication_year=1968,
         volume=297
     )
     session.add(book)
@@ -584,7 +584,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Childhood's End",
-        first_publication_year=1953,
+        publication_year=1953,
         volume=214
     )
     session.add(book)
@@ -595,7 +595,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Rendezvous with Rama",
-        first_publication_year=1973,
+        publication_year=1973,
         volume=243
     )
     session.add(book)
@@ -606,7 +606,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="The City and the Stars",
-        first_publication_year=1956,
+        publication_year=1956,
         volume=247
     )
     session.add(book)
@@ -617,7 +617,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="A Fall of Moondust",
-        first_publication_year=1961,
+        publication_year=1961,
         volume=224
     )
     session.add(book)
@@ -628,7 +628,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Imperial Earth",
-        first_publication_year=1975,
+        publication_year=1975,
         volume=304
     )
     session.add(book)
@@ -649,7 +649,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Stranger in a Strange Land",
-        first_publication_year=1961,
+        publication_year=1961,
         volume=525
     )
     session.add(book)
@@ -660,7 +660,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="Starship Troopers",
-        first_publication_year=1959,
+        publication_year=1959,
         volume=335
     )
     session.add(book)
@@ -671,7 +671,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Time Enough for Love",
-        first_publication_year=1973,
+        publication_year=1973,
         volume=605
     )
     session.add(book)
@@ -682,7 +682,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="The Moon Is a Harsh Mistress",
-        first_publication_year=1966,
+        publication_year=1966,
         volume=382
     )
     session.add(book)
@@ -693,7 +693,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="Red Planet",
-        first_publication_year=1949,
+        publication_year=1949,
         volume=201
     )
     session.add(book)
@@ -704,7 +704,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="Have Space Suit—Will Travel",
-        first_publication_year=1958,
+        publication_year=1958,
         volume=224
     )
     session.add(book)
@@ -715,7 +715,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Friday",
-        first_publication_year=1982,
+        publication_year=1982,
         volume=368
     )
     session.add(book)
@@ -736,7 +736,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="A Study in Scarlet",
-        first_publication_year=1887,
+        publication_year=1887,
         volume=123
     )
     session.add(book)
@@ -747,7 +747,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="The Sign of Four",
-        first_publication_year=1890,
+        publication_year=1890,
         volume=138
     )
     session.add(book)
@@ -758,7 +758,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="The Adventures of Sherlock Holmes",
-        first_publication_year=1892,
+        publication_year=1892,
         volume=307
     )
     session.add(book)
@@ -769,7 +769,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="The Hound of the Baskervilles",
-        first_publication_year=1902,
+        publication_year=1902,
         volume=256
     )
     session.add(book)
@@ -780,7 +780,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="The Return of Sherlock Holmes",
-        first_publication_year=1905,
+        publication_year=1905,
         volume=378
     )
     session.add(book)
@@ -791,7 +791,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Lost World",
-        first_publication_year=1912,
+        publication_year=1912,
         volume=224
     )
     session.add(book)
@@ -812,7 +812,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="The Murder of Roger Ackroyd",
-        first_publication_year=1926,
+        publication_year=1926,
         volume=288
     )
     session.add(book)
@@ -823,7 +823,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="Murder on the Orient Express",
-        first_publication_year=1934,
+        publication_year=1934,
         volume=256
     )
     session.add(book)
@@ -834,7 +834,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="And Then There Were None",
-        first_publication_year=1939,
+        publication_year=1939,
         volume=264
     )
     session.add(book)
@@ -845,7 +845,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="Death on the Nile",
-        first_publication_year=1937,
+        publication_year=1937,
         volume=352
     )
     session.add(book)
@@ -856,7 +856,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="The ABC Murders",
-        first_publication_year=1936,
+        publication_year=1936,
         volume=256
     )
     session.add(book)
@@ -867,7 +867,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="Hercule Poirot's Christmas",
-        first_publication_year=1938,
+        publication_year=1938,
         volume=288
     )
     session.add(book)
@@ -878,7 +878,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="The Body in the Library",
-        first_publication_year=1942,
+        publication_year=1942,
         volume=224
     )
     session.add(book)
@@ -899,7 +899,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Eugene Onegin",
-        first_publication_year=1833,
+        publication_year=1833,
         volume=240
     )
     session.add(book)
@@ -910,7 +910,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.YoungAdult,
         title="Ruslan and Lyudmila",
-        first_publication_year=1820,
+        publication_year=1820,
         volume=96
     )
     session.add(book)
@@ -921,7 +921,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="The Bronze Horseman and Other Poems",
-        first_publication_year=1837,
+        publication_year=1837,
         volume=128
     )
     session.add(book)
@@ -932,7 +932,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Selected Lyric Poetry",
-        first_publication_year=1825,
+        publication_year=1825,
         volume=192
     )
     session.add(book)
@@ -943,7 +943,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.YoungAdult,
         title="The Tale of Tsar Saltan",
-        first_publication_year=1831,
+        publication_year=1831,
         volume=64
     )
     session.add(book)
@@ -964,7 +964,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Shakespeare's Sonnets",
-        first_publication_year=1609,
+        publication_year=1609,
         volume=128
     )
     session.add(book)
@@ -975,7 +975,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Venus and Adonis",
-        first_publication_year=1593,
+        publication_year=1593,
         volume=80
     )
     session.add(book)
@@ -986,7 +986,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="The Rape of Lucrece",
-        first_publication_year=1594,
+        publication_year=1594,
         volume=96
     )
     session.add(book)
@@ -997,7 +997,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="A Lover's Complaint",
-        first_publication_year=1609,
+        publication_year=1609,
         volume=48
     )
     session.add(book)
@@ -1008,7 +1008,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.AllAges,
         title="The Phoenix and the Turtle",
-        first_publication_year=1601,
+        publication_year=1601,
         volume=32
     )
     session.add(book)
@@ -1029,7 +1029,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Childe Harold's Pilgrimage",
-        first_publication_year=1812,
+        publication_year=1812,
         volume=224
     )
     session.add(book)
@@ -1040,7 +1040,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Don Juan",
-        first_publication_year=1819,
+        publication_year=1819,
         volume=672
     )
     session.add(book)
@@ -1051,7 +1051,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="The Corsair",
-        first_publication_year=1814,
+        publication_year=1814,
         volume=96
     )
     session.add(book)
@@ -1062,7 +1062,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="She Walks in Beauty and Other Poems",
-        first_publication_year=1815,
+        publication_year=1815,
         volume=128
     )
     session.add(book)
@@ -1073,7 +1073,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.YoungAdult,
         title="The Prisoner of Chillon",
-        first_publication_year=1816,
+        publication_year=1816,
         volume=64
     )
     session.add(book)
@@ -1084,7 +1084,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Manfred",
-        first_publication_year=1817,
+        publication_year=1817,
         volume=88
     )
     session.add(book)
@@ -1105,7 +1105,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.Adult,
         title="Gone with the Wind",
-        first_publication_year=1936,
+        publication_year=1936,
         volume=1037
     )
     session.add(book)
@@ -1126,7 +1126,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.YoungAdult,
         title="Pride and Prejudice",
-        first_publication_year=1813,
+        publication_year=1813,
         volume=432
     )
     session.add(book)
@@ -1137,7 +1137,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.YoungAdult,
         title="Sense and Sensibility",
-        first_publication_year=1811,
+        publication_year=1811,
         volume=409
     )
     session.add(book)
@@ -1148,7 +1148,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.YoungAdult,
         title="Emma",
-        first_publication_year=1815,
+        publication_year=1815,
         volume=474
     )
     session.add(book)
@@ -1159,7 +1159,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.YoungAdult,
         title="Mansfield Park",
-        first_publication_year=1814,
+        publication_year=1814,
         volume=560
     )
     session.add(book)
@@ -1170,7 +1170,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.YoungAdult,
         title="Northanger Abbey",
-        first_publication_year=1817,
+        publication_year=1817,
         volume=272
     )
     session.add(book)
@@ -1181,7 +1181,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.Adult,
         title="Persuasion",
-        first_publication_year=1817,
+        publication_year=1817,
         volume=249
     )
     session.add(book)
@@ -1202,7 +1202,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="City",
-        first_publication_year=1952,
+        publication_year=1952,
         volume=251
     )
     session.add(book)
@@ -1213,7 +1213,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Way Station",
-        first_publication_year=1963,
+        publication_year=1963,
         volume=210
     )
     session.add(book)
@@ -1224,7 +1224,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="Time and Again",
-        first_publication_year=1951,
+        publication_year=1951,
         volume=188
     )
     session.add(book)
@@ -1235,7 +1235,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="All Flesh Is Grass",
-        first_publication_year=1965,
+        publication_year=1965,
         volume=192
     )
     session.add(book)
@@ -1246,7 +1246,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="The Goblin Reservation",
-        first_publication_year=1968,
+        publication_year=1968,
         volume=216
     )
     session.add(book)
@@ -1257,7 +1257,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="A Choice of Gods",
-        first_publication_year=1972,
+        publication_year=1972,
         volume=201
     )
     session.add(book)
@@ -1278,7 +1278,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="Tales of Mystery and Imagination",
-        first_publication_year=1845,
+        publication_year=1845,
         volume=272
     )
     session.add(book)
@@ -1289,7 +1289,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="The Fall of the House of Usher and Other Tales",
-        first_publication_year=1839,
+        publication_year=1839,
         volume=128
     )
     session.add(book)
@@ -1300,7 +1300,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="The Murders in the Rue Morgue",
-        first_publication_year=1841,
+        publication_year=1841,
         volume=64
     )
     session.add(book)
@@ -1311,7 +1311,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="The Raven and Other Poems",
-        first_publication_year=1845,
+        publication_year=1845,
         volume=96
     )
     session.add(book)
@@ -1322,7 +1322,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="The Pit and the Pendulum and Other Stories",
-        first_publication_year=1842,
+        publication_year=1842,
         volume=112
     )
     session.add(book)
@@ -1333,7 +1333,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.YoungAdult,
         title="The Gold Bug and Other Stories",
-        first_publication_year=1843,
+        publication_year=1843,
         volume=128
     )
     session.add(book)
@@ -1354,7 +1354,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.AllAges,
         title="The Hobbit",
-        first_publication_year=1937,
+        publication_year=1937,
         volume=366
     )
     session.add(book)
@@ -1365,7 +1365,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="The Fellowship of the Ring",
-        first_publication_year=1954,
+        publication_year=1954,
         volume=423
     )
     session.add(book)
@@ -1376,7 +1376,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="The Two Towers",
-        first_publication_year=1954,
+        publication_year=1954,
         volume=352
     )
     session.add(book)
@@ -1387,7 +1387,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="The Return of the King",
-        first_publication_year=1955,
+        publication_year=1955,
         volume=416
     )
     session.add(book)
@@ -1398,7 +1398,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="The Silmarillion",
-        first_publication_year=1977,
+        publication_year=1977,
         volume=365
     )
     session.add(book)
@@ -1409,7 +1409,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Unfinished Tales",
-        first_publication_year=1980,
+        publication_year=1980,
         volume=472
     )
     session.add(book)
@@ -1430,7 +1430,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="A Game of Thrones",
-        first_publication_year=1996,
+        publication_year=1996,
         volume=694
     )
     session.add(book)
@@ -1441,7 +1441,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="A Clash of Kings",
-        first_publication_year=1998,
+        publication_year=1998,
         volume=761
     )
     session.add(book)
@@ -1452,7 +1452,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="A Storm of Swords",
-        first_publication_year=2000,
+        publication_year=2000,
         volume=973
     )
     session.add(book)
@@ -1463,7 +1463,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="A Feast for Crows",
-        first_publication_year=2005,
+        publication_year=2005,
         volume=753
     )
     session.add(book)
@@ -1474,7 +1474,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="A Dance with Dragons",
-        first_publication_year=2011,
+        publication_year=2011,
         volume=1016
     )
     session.add(book)
@@ -1485,7 +1485,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Fire & Blood",
-        first_publication_year=2018,
+        publication_year=2018,
         volume=736
     )
     session.add(book)
@@ -1506,7 +1506,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="The Da Vinci Code",
-        first_publication_year=2003,
+        publication_year=2003,
         volume=454
     )
     session.add(book)
@@ -1517,7 +1517,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Angels & Demons",
-        first_publication_year=2000,
+        publication_year=2000,
         volume=713
     )
     session.add(book)
@@ -1528,7 +1528,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="The Lost Symbol",
-        first_publication_year=2009,
+        publication_year=2009,
         volume=671
     )
     session.add(book)
@@ -1539,7 +1539,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Inferno",
-        first_publication_year=2013,
+        publication_year=2013,
         volume=480
     )
     session.add(book)
@@ -1550,7 +1550,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Digital Fortress",
-        first_publication_year=1998,
+        publication_year=1998,
         volume=510
     )
     session.add(book)
@@ -1561,7 +1561,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Origin",
-        first_publication_year=2017,
+        publication_year=2017,
         volume=480
     )
     session.add(book)
@@ -1582,7 +1582,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Old Man and the Sea",
-        first_publication_year=1952,
+        publication_year=1952,
         volume=127
     )
     session.add(book)
@@ -1593,7 +1593,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="A Farewell to Arms",
-        first_publication_year=1929,
+        publication_year=1929,
         volume=355
     )
     session.add(book)
@@ -1604,7 +1604,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="For Whom the Bell Tolls",
-        first_publication_year=1940,
+        publication_year=1940,
         volume=471
     )
     session.add(book)
@@ -1615,7 +1615,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Sun Also Rises",
-        first_publication_year=1926,
+        publication_year=1926,
         volume=251
     )
     session.add(book)
@@ -1626,7 +1626,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="A Moveable Feast",
-        first_publication_year=1964,
+        publication_year=1964,
         volume=211
     )
     session.add(book)
@@ -1637,7 +1637,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Islands in the Stream",
-        first_publication_year=1970,
+        publication_year=1970,
         volume=466
     )
     session.add(book)
@@ -1658,7 +1658,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.Children,
         title="The Adventures of Tom Sawyer",
-        first_publication_year=1876,
+        publication_year=1876,
         volume=274
     )
     session.add(book)
@@ -1669,7 +1669,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="Adventures of Huckleberry Finn",
-        first_publication_year=1884,
+        publication_year=1884,
         volume=366
     )
     session.add(book)
@@ -1680,7 +1680,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.Children,
         title="The Prince and the Pauper",
-        first_publication_year=1881,
+        publication_year=1881,
         volume=234
     )
     session.add(book)
@@ -1691,7 +1691,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="A Connecticut Yankee in King Arthur's Court",
-        first_publication_year=1889,
+        publication_year=1889,
         volume=301
     )
     session.add(book)
@@ -1702,7 +1702,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="Pudd'nhead Wilson",
-        first_publication_year=1894,
+        publication_year=1894,
         volume=216
     )
     session.add(book)
@@ -1723,7 +1723,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="The Picture of Dorian Gray",
-        first_publication_year=1890,
+        publication_year=1890,
         volume=254
     )
     session.add(book)
@@ -1734,7 +1734,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.Children,
         title="The Happy Prince and Other Tales",
-        first_publication_year=1888,
+        publication_year=1888,
         volume=96
     )
     session.add(book)
@@ -1745,7 +1745,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.Children,
         title="A House of Pomegranates",
-        first_publication_year=1891,
+        publication_year=1891,
         volume=128
     )
     session.add(book)
@@ -1756,7 +1756,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="The Ballad of Reading Gaol",
-        first_publication_year=1898,
+        publication_year=1898,
         volume=48
     )
     session.add(book)
@@ -1767,7 +1767,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=7,  # Romance
         reading_level=ReadingLevel.Adult,
         title="De Profundis",
-        first_publication_year=1905,
+        publication_year=1905,
         volume=160
     )
     session.add(book)
@@ -1788,7 +1788,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="Oliver Twist",
-        first_publication_year=1838,
+        publication_year=1838,
         volume=608
     )
     session.add(book)
@@ -1799,7 +1799,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="David Copperfield",
-        first_publication_year=1850,
+        publication_year=1850,
         volume=882
     )
     session.add(book)
@@ -1810,7 +1810,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="Great Expectations",
-        first_publication_year=1861,
+        publication_year=1861,
         volume=544
     )
     session.add(book)
@@ -1821,7 +1821,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.AllAges,
         title="A Christmas Carol",
-        first_publication_year=1843,
+        publication_year=1843,
         volume=104
     )
     session.add(book)
@@ -1832,7 +1832,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="A Tale of Two Cities",
-        first_publication_year=1859,
+        publication_year=1859,
         volume=489
     )
     session.add(book)
@@ -1843,7 +1843,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Hard Times",
-        first_publication_year=1854,
+        publication_year=1854,
         volume=368
     )
     session.add(book)
@@ -1864,7 +1864,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Norwegian Wood",
-        first_publication_year=1987,
+        publication_year=1987,
         volume=296
     )
     session.add(book)
@@ -1875,7 +1875,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Kafka on the Shore",
-        first_publication_year=2002,
+        publication_year=2002,
         volume=436
     )
     session.add(book)
@@ -1886,7 +1886,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Hard-Boiled Wonderland and the End of the World",
-        first_publication_year=1985,
+        publication_year=1985,
         volume=400
     )
     session.add(book)
@@ -1897,7 +1897,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="The Wind-Up Bird Chronicle",
-        first_publication_year=1994,
+        publication_year=1994,
         volume=607
     )
     session.add(book)
@@ -1908,7 +1908,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="1Q84",
-        first_publication_year=2009,
+        publication_year=2009,
         volume=925
     )
     session.add(book)
@@ -1919,7 +1919,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Colorless Tsukuru Tazaki and His Years of Pilgrimage",
-        first_publication_year=2013,
+        publication_year=2013,
         volume=298
     )
     session.add(book)
@@ -1940,7 +1940,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="The Alchemist",
-        first_publication_year=1988,
+        publication_year=1988,
         volume=163
     )
     session.add(book)
@@ -1951,7 +1951,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="The Pilgrimage",
-        first_publication_year=1987,
+        publication_year=1987,
         volume=256
     )
     session.add(book)
@@ -1962,7 +1962,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Brida",
-        first_publication_year=1990,
+        publication_year=1990,
         volume=208
     )
     session.add(book)
@@ -1973,7 +1973,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="The Valkyries",
-        first_publication_year=1992,
+        publication_year=1992,
         volume=243
     )
     session.add(book)
@@ -1984,7 +1984,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Adult,
         title="Veronika Decides to Die",
-        first_publication_year=1998,
+        publication_year=1998,
         volume=210
     )
     session.add(book)
@@ -1995,7 +1995,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.YoungAdult,
         title="The Witch of Portobello",
-        first_publication_year=2006,
+        publication_year=2006,
         volume=288
     )
     session.add(book)
@@ -2016,7 +2016,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.AllAges,
         title="Alice's Adventures in Wonderland",
-        first_publication_year=1865,
+        publication_year=1865,
         volume=96
     )
     session.add(book)
@@ -2027,7 +2027,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.AllAges,
         title="Through the Looking-Glass",
-        first_publication_year=1871,
+        publication_year=1871,
         volume=128
     )
     session.add(book)
@@ -2038,7 +2038,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.AllAges,
         title="The Hunting of the Snark",
-        first_publication_year=1876,
+        publication_year=1876,
         volume=64
     )
     session.add(book)
@@ -2049,7 +2049,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=1,  # Fantasy
         reading_level=ReadingLevel.Children,
         title="Sylvie and Bruno",
-        first_publication_year=1889,
+        publication_year=1889,
         volume=256
     )
     session.add(book)
@@ -2060,7 +2060,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.AllAges,
         title="Jabberwocky and Other Nonsense Poems",
-        first_publication_year=1871,
+        publication_year=1871,
         volume=80
     )
     session.add(book)
@@ -2081,7 +2081,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.AllAges,
         title="Twenty Thousand Leagues Under the Sea",
-        first_publication_year=1870,
+        publication_year=1870,
         volume=448
     )
     session.add(book)
@@ -2092,7 +2092,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.AllAges,
         title="Around the World in Eighty Days",
-        first_publication_year=1873,
+        publication_year=1873,
         volume=256
     )
     session.add(book)
@@ -2103,7 +2103,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.AllAges,
         title="Journey to the Center of the Earth",
-        first_publication_year=1864,
+        publication_year=1864,
         volume=240
     )
     session.add(book)
@@ -2114,7 +2114,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.AllAges,
         title="From the Earth to the Moon",
-        first_publication_year=1865,
+        publication_year=1865,
         volume=208
     )
     session.add(book)
@@ -2125,7 +2125,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.AllAges,
         title="The Mysterious Island",
-        first_publication_year=1874,
+        publication_year=1874,
         volume=625
     )
     session.add(book)
@@ -2136,7 +2136,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.AllAges,
         title="Five Weeks in a Balloon",
-        first_publication_year=1863,
+        publication_year=1863,
         volume=208
     )
     session.add(book)
@@ -2147,7 +2147,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=3,  # Adventure
         reading_level=ReadingLevel.YoungAdult,
         title="The Children of Captain Grant",
-        first_publication_year=1867,
+        publication_year=1867,
         volume=480
     )
     session.add(book)
@@ -2168,7 +2168,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Les Misérables",
-        first_publication_year=1862,
+        publication_year=1862,
         volume=1232
     )
     session.add(book)
@@ -2179,7 +2179,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="The Hunchback of Notre-Dame",
-        first_publication_year=1831,
+        publication_year=1831,
         volume=512
     )
     session.add(book)
@@ -2190,7 +2190,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Ninety-Three",
-        first_publication_year=1874,
+        publication_year=1874,
         volume=368
     )
     session.add(book)
@@ -2201,7 +2201,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Toilers of the Sea",
-        first_publication_year=1866,
+        publication_year=1866,
         volume=448
     )
     session.add(book)
@@ -2212,7 +2212,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=4,  # Poetry
         reading_level=ReadingLevel.Adult,
         title="Selected Poems",
-        first_publication_year=1829,
+        publication_year=1829,
         volume=256
     )
     session.add(book)
@@ -2233,7 +2233,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.Adult,
         title="1984",
-        first_publication_year=1949,
+        publication_year=1949,
         volume=328
     )
     session.add(book)
@@ -2244,7 +2244,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=6,  # Science Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="Animal Farm",
-        first_publication_year=1945,
+        publication_year=1945,
         volume=112
     )
     session.add(book)
@@ -2255,7 +2255,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Homage to Catalonia",
-        first_publication_year=1938,
+        publication_year=1938,
         volume=232
     )
     session.add(book)
@@ -2266,7 +2266,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Down and Out in Paris and London",
-        first_publication_year=1933,
+        publication_year=1933,
         volume=213
     )
     session.add(book)
@@ -2277,7 +2277,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Road to Wigan Pier",
-        first_publication_year=1937,
+        publication_year=1937,
         volume=264
     )
     session.add(book)
@@ -2288,7 +2288,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Burmese Days",
-        first_publication_year=1934,
+        publication_year=1934,
         volume=287
     )
     session.add(book)
@@ -2309,7 +2309,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="War and Peace",
-        first_publication_year=1869,
+        publication_year=1869,
         volume=1225
     )
     session.add(book)
@@ -2320,7 +2320,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Anna Karenina",
-        first_publication_year=1877,
+        publication_year=1877,
         volume=838
     )
     session.add(book)
@@ -2331,7 +2331,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Death of Ivan Ilyich",
-        first_publication_year=1886,
+        publication_year=1886,
         volume=96
     )
     session.add(book)
@@ -2342,7 +2342,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Kreutzer Sonata",
-        first_publication_year=1889,
+        publication_year=1889,
         volume=128
     )
     session.add(book)
@@ -2353,7 +2353,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="Resurrection",
-        first_publication_year=1899,
+        publication_year=1899,
         volume=576
     )
     session.add(book)
@@ -2364,7 +2364,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="The Cossacks",
-        first_publication_year=1863,
+        publication_year=1863,
         volume=192
     )
     session.add(book)
@@ -2385,7 +2385,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=5,  # Mystery
         reading_level=ReadingLevel.Adult,
         title="Crime and Punishment",
-        first_publication_year=1866,
+        publication_year=1866,
         volume=671
     )
     session.add(book)
@@ -2396,7 +2396,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Brothers Karamazov",
-        first_publication_year=1880,
+        publication_year=1880,
         volume=824
     )
     session.add(book)
@@ -2407,7 +2407,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Notes from Underground",
-        first_publication_year=1864,
+        publication_year=1864,
         volume=136
     )
     session.add(book)
@@ -2418,7 +2418,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.Adult,
         title="The Idiot",
-        first_publication_year=1869,
+        publication_year=1869,
         volume=656
     )
     session.add(book)
@@ -2429,7 +2429,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="Demons",
-        first_publication_year=1872,
+        publication_year=1872,
         volume=768
     )
     session.add(book)
@@ -2440,7 +2440,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=2,  # Historical Fiction
         reading_level=ReadingLevel.YoungAdult,
         title="Poor Folk",
-        first_publication_year=1846,
+        publication_year=1846,
         volume=128
     )
     session.add(book)
@@ -2451,7 +2451,7 @@ async def insert_books(session: AsyncSessionDep):
         genre_id=8,  # Thriller
         reading_level=ReadingLevel.Adult,
         title="The Gambler",
-        first_publication_year=1867,
+        publication_year=1867,
         volume=144
     )
     session.add(book)
@@ -2484,7 +2484,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="The Three-Body Problem",
-        first_publication_year=2008,
+        publication_year=2008,
         volume=390
     )
     session.add(book)
@@ -2494,7 +2494,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="The Dark Forest",
-        first_publication_year=2008,
+        publication_year=2008,
         volume=400
     )
     session.add(book)
@@ -2504,7 +2504,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="Death's End",
-        first_publication_year=2010,
+        publication_year=2010,
         volume=592
     )
     session.add(book)
@@ -2523,7 +2523,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="The Crystal Veil",
-        first_publication_year=2015,
+        publication_year=2015,
         volume=320
     )
     session.add(book)
@@ -2533,7 +2533,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="Shadow of the Flame",
-        first_publication_year=2017,
+        publication_year=2017,
         volume=350
     )
     session.add(book)
@@ -2552,7 +2552,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=2,
         reading_level=ReadingLevel.Adult,
         title="The Last Crown",
-        first_publication_year=2010,
+        publication_year=2010,
         volume=400
     )
     session.add(book)
@@ -2571,7 +2571,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=3,
         reading_level=ReadingLevel.YoungAdult,
         title="Treasure of the Deep",
-        first_publication_year=2018,
+        publication_year=2018,
         volume=280
     )
     session.add(book)
@@ -2581,7 +2581,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=3,
         reading_level=ReadingLevel.YoungAdult,
         title="Skyward Journey",
-        first_publication_year=2020,
+        publication_year=2020,
         volume=300
     )
     session.add(book)
@@ -2600,7 +2600,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=4,
         reading_level=ReadingLevel.AllAges,
         title="Whispers of Dawn",
-        first_publication_year=2012,
+        publication_year=2012,
         volume=150
     )
     session.add(book)
@@ -2619,7 +2619,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=5,
         reading_level=ReadingLevel.Adult,
         title="The Silent Clue",
-        first_publication_year=2019,
+        publication_year=2019,
         volume=340
     )
     session.add(book)
@@ -2629,7 +2629,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=5,
         reading_level=ReadingLevel.Adult,
         title="Enigma's Shadow",
-        first_publication_year=2021,
+        publication_year=2021,
         volume=360
     )
     session.add(book)
@@ -2648,7 +2648,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=6,
         reading_level=ReadingLevel.Adult,
         title="Starborn Legacy",
-        first_publication_year=2014,
+        publication_year=2014,
         volume=420
     )
     session.add(book)
@@ -2667,7 +2667,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=7,
         reading_level=ReadingLevel.Adult,
         title="Hearts in Time",
-        first_publication_year=2016,
+        publication_year=2016,
         volume=290
     )
     session.add(book)
@@ -2677,7 +2677,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=7,
         reading_level=ReadingLevel.Adult,
         title="Forever's Promise",
-        first_publication_year=2018,
+        publication_year=2018,
         volume=310
     )
     session.add(book)
@@ -2696,7 +2696,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=8,
         reading_level=ReadingLevel.Adult,
         title="Edge of Fear",
-        first_publication_year=2020,
+        publication_year=2020,
         volume=370
     )
     session.add(book)
@@ -2715,7 +2715,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.YoungAdult,
         title="Moonlit Quest",
-        first_publication_year=2017,
+        publication_year=2017,
         volume=330
     )
     session.add(book)
@@ -2725,7 +2725,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.YoungAdult,
         title="Star of the Realm",
-        first_publication_year=2019,
+        publication_year=2019,
         volume=350
     )
     session.add(book)
@@ -2744,7 +2744,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=2,
         reading_level=ReadingLevel.Adult,
         title="Echoes of Empire",
-        first_publication_year=2013,
+        publication_year=2013,
         volume=380
     )
     session.add(book)
@@ -2763,7 +2763,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=3,
         reading_level=ReadingLevel.Children,
         title="Island Adventure",
-        first_publication_year=2015,
+        publication_year=2015,
         volume=200
     )
     session.add(book)
@@ -2773,7 +2773,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=3,
         reading_level=ReadingLevel.Children,
         title="Pirate's Quest",
-        first_publication_year=2017,
+        publication_year=2017,
         volume=220
     )
     session.add(book)
@@ -2792,7 +2792,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=4,
         reading_level=ReadingLevel.AllAges,
         title="Silent Verses",
-        first_publication_year=2011,
+        publication_year=2011,
         volume=140
     )
     session.add(book)
@@ -2811,7 +2811,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=5,
         reading_level=ReadingLevel.Adult,
         title="The Hidden Truth",
-        first_publication_year=2022,
+        publication_year=2022,
         volume=390
     )
     session.add(book)
@@ -2821,7 +2821,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=5,
         reading_level=ReadingLevel.Adult,
         title="Mystery of the Manor",
-        first_publication_year=2023,
+        publication_year=2023,
         volume=410
     )
     session.add(book)
@@ -2840,7 +2840,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=6,
         reading_level=ReadingLevel.Adult,
         title="Quantum Horizon",
-        first_publication_year=2016,
+        publication_year=2016,
         volume=450
     )
     session.add(book)
@@ -2859,7 +2859,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=7,
         reading_level=ReadingLevel.YoungAdult,
         title="Love's Last Song",
-        first_publication_year=2019,
+        publication_year=2019,
         volume=270
     )
     session.add(book)
@@ -2869,7 +2869,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=7,
         reading_level=ReadingLevel.YoungAdult,
         title="Eternal Flame",
-        first_publication_year=2021,
+        publication_year=2021,
         volume=290
     )
     session.add(book)
@@ -2888,7 +2888,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=8,
         reading_level=ReadingLevel.Adult,
         title="Dark Pursuit",
-        first_publication_year=2018,
+        publication_year=2018,
         volume=360
     )
     session.add(book)
@@ -2907,7 +2907,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="The Forgotten Realm",
-        first_publication_year=2014,
+        publication_year=2014,
         volume=340
     )
     session.add(book)
@@ -2917,7 +2917,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.Adult,
         title="Sword of Destiny",
-        first_publication_year=2016,
+        publication_year=2016,
         volume=360
     )
     session.add(book)
@@ -2936,7 +2936,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=2,
         reading_level=ReadingLevel.Adult,
         title="The Fallen Kingdom",
-        first_publication_year=2012,
+        publication_year=2012,
         volume=420
     )
     session.add(book)
@@ -2955,7 +2955,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=3,
         reading_level=ReadingLevel.YoungAdult,
         title="Voyage of the Stars",
-        first_publication_year=2020,
+        publication_year=2020,
         volume=310
     )
     session.add(book)
@@ -2965,7 +2965,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=3,
         reading_level=ReadingLevel.YoungAdult,
         title="The Lost Explorer",
-        first_publication_year=2022,
+        publication_year=2022,
         volume=330
     )
     session.add(book)
@@ -2984,7 +2984,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=4,
         reading_level=ReadingLevel.AllAges,
         title="Echoes in Verse",
-        first_publication_year=2010,
+        publication_year=2010,
         volume=160
     )
     session.add(book)
@@ -3003,7 +3003,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=5,
         reading_level=ReadingLevel.Adult,
         title="The Final Secret",
-        first_publication_year=2017,
+        publication_year=2017,
         volume=380
     )
     session.add(book)
@@ -3013,7 +3013,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=5,
         reading_level=ReadingLevel.Adult,
         title="Shadows of Doubt",
-        first_publication_year=2019,
+        publication_year=2019,
         volume=400
     )
     session.add(book)
@@ -3032,7 +3032,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=6,
         reading_level=ReadingLevel.Adult,
         title="Galactic Dawn",
-        first_publication_year=2015,
+        publication_year=2015,
         volume=430
     )
     session.add(book)
@@ -3051,7 +3051,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=7,
         reading_level=ReadingLevel.Adult,
         title="Whispers of Love",
-        first_publication_year=2018,
+        publication_year=2018,
         volume=300
     )
     session.add(book)
@@ -3061,7 +3061,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=7,
         reading_level=ReadingLevel.Adult,
         title="Fate's Embrace",
-        first_publication_year=2020,
+        publication_year=2020,
         volume=320
     )
     session.add(book)
@@ -3080,7 +3080,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=8,
         reading_level=ReadingLevel.Adult,
         title="The Last Stand",
-        first_publication_year=2021,
+        publication_year=2021,
         volume=350
     )
     session.add(book)
@@ -3099,7 +3099,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.YoungAdult,
         title="The Eternal Spark",
-        first_publication_year=2016,
+        publication_year=2016,
         volume=340
     )
     session.add(book)
@@ -3109,7 +3109,7 @@ async def insert_books_old(session: AsyncSessionDep):
         genre_id=1,
         reading_level=ReadingLevel.YoungAdult,
         title="Light of the Abyss",
-        first_publication_year=2018,
+        publication_year=2018,
         volume=360
     )
     session.add(book)
