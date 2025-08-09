@@ -6,6 +6,8 @@ from src.auth.models import (
     UsersInRolesOrm
 )
 
+from src.auth.utils import jwt as jwt_utils
+
 
 async def insert_roles(session: AsyncSession):
     role = RolesOrm(name="admin", title="Admin")
@@ -24,7 +26,13 @@ async def insert_roles(session: AsyncSession):
 async def insert_users(session: AsyncSession):
     await insert_roles(session)
 
-    user = UsersOrm(email="apkotl@gmail.com", nickname="apkotl", first_name="Andrey", last_name="Kotlyarov")
+    user = UsersOrm(
+        email="apkotl@gmail.com",
+        nickname="apkotl",
+        password_hash=jwt_utils.hash_password("111"),
+        first_name="Andrey",
+        last_name="Kotlyarov"
+    )
     session.add(user)
     await  session.commit()
     users_in_roles = UsersInRolesOrm(user_id=user.id, role_id=1)

@@ -45,6 +45,9 @@ def read_item():# -> ResponseSchema[dict[str, str | int]]:
             "DB_PORT": settings.DB_PORT,
 
             "OAUTH_GOOGLE_CLIENT_ID": settings.OAUTH_GOOGLE_CLIENT_ID,
+            "JWT_ALGORITHM": settings.JWT_ALGORITHM,
+            "JWT_ACCESS_TOKEN_EXPIRE_MINUTES": settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES,
+            "JWT_REFRESH_TOKEN_EXPIRE_DAYS": settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS,
 
             "web_url": settings.web_url(),
             "frontend_url": settings.frontend_url(),

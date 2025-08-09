@@ -1,5 +1,6 @@
 import datetime
 import enum
+from email.policy import default
 from typing import List
 
 from sqlalchemy import ForeignKey, Enum, Table, Column, Integer
@@ -11,8 +12,13 @@ from src.core.models import (
     pk_column,
     str_column,
     created_at_column,
-    updated_at_column
+    updated_at_column,
+    expires_at_column
 )
+
+
+
+
 
 
 
@@ -23,6 +29,7 @@ class UsersOrm(BaseOrm):
     id: Mapped[int] = pk_column()
     email: Mapped[str] = str_column(128, unique=True)
     nickname: Mapped[str] = str_column(64, unique=True)
+    password_hash: Mapped[str] = str_column(256, nullable=False, default="", server_default="")
     is_active: Mapped[bool] = mapped_column(default=True)
     first_name: Mapped[str]
     last_name: Mapped[str]
@@ -45,6 +52,10 @@ class UsersOrm(BaseOrm):
     #    back_populates="user",
     #    overlaps="roles"
     #)
+
+    refresh_tokens: Mapped[list["RefreshTokensOrm"]] = relationship(
+        back_populates="user",
+    )
 
 
 class RolesOrm(BaseOrm):
@@ -114,4 +125,19 @@ class UsersInRolesOrm(BaseOrm):
     )
 
 
+class RefreshTokensOrm(BaseOrm):
+    __tablename__ = "refresh_tokens"
+    __table_args__ = {'schema': 'auth'}
 
+    id: Mapped[int] = pk_column()
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("auth.users.id")
+    )
+    token_hash: Mapped[str] = str_column(256, nullable=False, default="", server_default="")
+
+    created_at: Mapped[datetime.datetime] = created_at_column()
+    expires_at: Mapped[datetime.datetime] = expires_at_column()
+
+    user: Mapped[list["UsersOrm"]] = relationship(
+        back_populates="refresh_tokens",
+    )

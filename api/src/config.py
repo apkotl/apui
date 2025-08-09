@@ -64,6 +64,11 @@ class Settings(BaseSettings):
     OAUTH_GOOGLE_CLIENT_ID: str = Field(...)
     OAUTH_GOOGLE_CLIENT_SECRET: str = Field(...)
 
+    JWT_ALGORITHM: str = Field(...)
+    JWT_SECRET_KEY: str = Field(...)
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(...)
+    JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = Field(...)
+
 
     def web_url(self, path: str = ''):
         _port = ""
@@ -119,6 +124,9 @@ if __name__ == "__main__":
     print(f"REDIS_PORT: {settings.REDIS_PORT}")
     print(f"--------")
     print(f"OAUTH_GOOGLE_CLIENT_ID: {settings.OAUTH_GOOGLE_CLIENT_ID}")
+    print(f"JWT_ALGORITHM: {settings.JWT_ALGORITHM}")
+    print(f"JWT_ACCESS_TOKEN_EXPIRE_MINUTES: {settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES}")
+    print(f"JWT_REFRESH_TOKEN_EXPIRE_DAYS: {settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS}")
 
 
 

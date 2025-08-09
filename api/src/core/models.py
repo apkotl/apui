@@ -23,6 +23,13 @@ def updated_at_column() -> Mapped[datetime.datetime]:
         onupdate=text("TIMEZONE('utc', now())"),
     )
 
+def expires_at_column() -> Mapped[datetime.datetime]:
+    return mapped_column(
+        DateTime(timezone=False),
+        server_default=text("TIMEZONE('utc', now()) + INTERVAL '7 days'")
+    )
+
+
 
 class BaseOrm(DeclarativeBase):
     pass

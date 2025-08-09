@@ -17,6 +17,9 @@ dependencies = [
     "redis (>=6.2.0,<7.0.0)",
     "httpx (>=0.28.1,<0.29.0)",
     "pydantic[email] (>=2.11.7,<3.0.0)",
+    "fastapi-jwt (>=0.3.0,<0.4.0)",
+    "passlib (>=1.7.4,<2.0.0)",
+    "bcrypt (>=4.3.0,<5.0.0)",
 ]
 
 [tool.poetry]
