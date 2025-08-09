@@ -5,6 +5,7 @@ from src.databases.dependencies import get_async_session
 
 from .service_db_01_create_all import setup_database
 from .service_db_02_books import insert_books
+from .service_db_03_auth import insert_users
 
 
 
@@ -19,6 +20,7 @@ class DbService:
 
     async def insert_data(self) -> None:
         await insert_books(self.session)
+        await insert_users(self.session)
 
 
 

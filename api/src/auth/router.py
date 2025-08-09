@@ -5,8 +5,8 @@ from fastapi.responses import RedirectResponse
 import jwt
 import aiohttp
 
+from src.core.schemas import ResponseSchema
 from src.core.exceptions import APIException
-from .schemas import GoogleUriTestResponse
 from src.config import settings
 
 from .config import generate_google_oauth_redirect_uri
@@ -34,7 +34,7 @@ def get_google_auth_redirect_uri_test(
     if mode == "prod":
         func = settings.web_url
     uri = generate_google_oauth_redirect_uri(func)
-    return GoogleUriTestResponse(data=uri)
+    return ResponseSchema[str](data=uri)
 
 
 @router.post("/google/callback")

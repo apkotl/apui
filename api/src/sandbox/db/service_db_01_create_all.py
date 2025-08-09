@@ -6,6 +6,7 @@ from src.core.models import BaseOrm
 
 async def setup_database(session: AsyncSession):
     await reset_schema(session, "art")
+    await reset_schema(session, "auth")
 
     async with session.bind.begin() as conn:
         await conn.run_sync(lambda sync_conn: BaseOrm.metadata.drop_all(sync_conn, checkfirst=True))
